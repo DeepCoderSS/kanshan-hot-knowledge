@@ -1,0 +1,1834 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="看山热知识：打开热点背后的知识盲盒，让你不只知道，还能聊出门道。"
+    />
+    <title>看山热知识｜热点背后的知识盲盒</title>
+    <style>
+:root {
+  --blue: #1769e0;
+  --blue-dark: #0f2d5c;
+  --blue-soft: #eaf3ff;
+  --ink: #17233a;
+  --muted: #60708a;
+  --paper: #fffefa;
+  --canvas: #f3f7fb;
+  --yellow: #ffd86b;
+  --orange: #ff9f43;
+  --green: #31a875;
+  --red: #f05a5a;
+  --line: #dbe5f1;
+  --shadow: 0 24px 70px rgba(24, 64, 115, 0.14);
+  --radius-xl: 32px;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: var(--ink);
+  background: var(--canvas);
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 8% 3%, rgba(23, 105, 224, 0.13), transparent 28rem),
+    radial-gradient(circle at 92% 13%, rgba(255, 216, 107, 0.2), transparent 25rem),
+    var(--canvas);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+.site-header {
+  width: min(1180px, calc(100% - 40px));
+  min-height: 76px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px 14px 18px 18px;
+  color: white;
+  background: var(--blue);
+  box-shadow: 0 8px 20px rgba(23, 105, 224, 0.25);
+  font-weight: 900;
+}
+
+.brand strong,
+.brand small {
+  display: block;
+}
+
+.brand strong {
+  font-size: 17px;
+  letter-spacing: -0.02em;
+}
+
+.brand small {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.live-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid rgba(49, 168, 117, 0.25);
+  border-radius: 999px;
+  color: #237456;
+  background: rgba(238, 250, 245, 0.9);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 5px rgba(49, 168, 117, 0.12);
+}
+
+main {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.case-switcher {
+  margin: 18px 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.case-switcher > span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+}
+
+.case-switcher > div {
+  display: flex;
+  gap: 10px;
+}
+
+.case-switcher button {
+  min-width: 170px;
+  padding: 10px 15px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: left;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.case-switcher button:hover {
+  transform: translateY(-2px);
+}
+
+.case-switcher button[aria-pressed="true"] {
+  border-color: var(--blue);
+  color: var(--blue-dark);
+  background: var(--blue-soft);
+  box-shadow: 0 8px 18px rgba(23, 105, 224, 0.12);
+}
+
+.case-switcher button small {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--blue);
+  font-size: 10px;
+}
+
+.hero {
+  position: relative;
+  min-height: 640px;
+  padding: 72px 70px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+  align-items: center;
+  gap: 50px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.76);
+  border-radius: 40px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 246, 255, 0.95));
+  box-shadow: var(--shadow);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  top: -160px;
+  right: 26%;
+  border: 50px solid rgba(23, 105, 224, 0.045);
+  border-radius: 50%;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow-row,
+.hero-actions,
+.section-heading,
+.talk-actions {
+  display: flex;
+  align-items: center;
+}
+
+.eyebrow-row {
+  gap: 12px;
+}
+
+.hot-rank {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: #a44d13;
+  background: #fff1d7;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.topic-time {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.hero-kicker {
+  margin: 28px 0 10px;
+  color: var(--blue);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 680px;
+  margin-bottom: 24px;
+  font-size: clamp(38px, 5.2vw, 66px);
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+}
+
+.topic-summary {
+  max-width: 670px;
+  margin-bottom: 26px;
+  color: #4a5b73;
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+.fact-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 34px;
+}
+
+.fact-chip {
+  padding: 9px 12px;
+  border: 1px solid #dce8f7;
+  border-radius: 10px;
+  color: #3f536f;
+  background: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.hero-actions,
+.talk-actions {
+  gap: 18px;
+}
+
+.primary-button,
+.secondary-button {
+  min-height: 52px;
+  padding: 0 22px;
+  border-radius: 15px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 800;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  color: white;
+  background: var(--blue);
+  box-shadow: 0 12px 24px rgba(23, 105, 224, 0.25);
+}
+
+.secondary-button {
+  color: var(--blue-dark);
+  background: white;
+  border: 1px solid var(--line);
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.box-button:hover {
+  transform: translateY(-2px);
+}
+
+.primary-button:focus-visible,
+.secondary-button:focus-visible,
+.box-button:focus-visible,
+.option-button:focus-visible,
+.dialog-close:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(23, 105, 224, 0.3);
+  outline-offset: 3px;
+}
+
+.text-link {
+  color: var(--blue-dark);
+  font-size: 14px;
+  font-weight: 750;
+  text-underline-offset: 4px;
+}
+
+.hero-visual {
+  position: relative;
+  min-height: 455px;
+  display: grid;
+  place-items: center;
+}
+
+.mascot-shell {
+  position: relative;
+  z-index: 2;
+  width: min(330px, 82%);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 42%, #ffffff 0 34%, #dfeeff 35% 57%, #bed9ff 58% 100%);
+  box-shadow:
+    inset 0 0 0 12px rgba(255, 255, 255, 0.7),
+    0 30px 50px rgba(36, 92, 159, 0.2);
+}
+
+.mascot-image {
+  position: absolute;
+  z-index: 3;
+  display: none;
+  width: 380%;
+  max-width: none;
+  height: auto;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  filter: drop-shadow(0 18px 20px rgba(25, 62, 111, 0.18));
+}
+
+.mascot-fallback {
+  position: relative;
+  width: 170px;
+  height: 210px;
+}
+
+.face {
+  position: absolute;
+  width: 170px;
+  height: 185px;
+  left: 0;
+  top: 20px;
+  border-radius: 48% 48% 45% 45%;
+  background: #f9fbff;
+  border: 8px solid var(--blue-dark);
+}
+
+.ear {
+  position: absolute;
+  z-index: 0;
+  width: 66px;
+  height: 72px;
+  top: 0;
+  border: 8px solid var(--blue-dark);
+  background: #f9fbff;
+  transform: rotate(45deg);
+}
+
+.ear-left {
+  left: 5px;
+  border-radius: 26px 8px 20px 8px;
+}
+
+.ear-right {
+  right: 5px;
+  border-radius: 8px 26px 8px 20px;
+}
+
+.eye {
+  position: absolute;
+  width: 11px;
+  height: 15px;
+  top: 76px;
+  border-radius: 50%;
+  background: var(--blue-dark);
+}
+
+.eye-left {
+  left: 49px;
+}
+
+.eye-right {
+  right: 49px;
+}
+
+.nose {
+  position: absolute;
+  width: 14px;
+  height: 10px;
+  left: 50%;
+  top: 105px;
+  border-radius: 50% 50% 45% 45%;
+  background: var(--blue-dark);
+  transform: translateX(-50%);
+}
+
+.scarf {
+  position: absolute;
+  z-index: 3;
+  width: 152px;
+  height: 30px;
+  left: 9px;
+  bottom: 7px;
+  border-radius: 8px 18px 18px 8px;
+  background: var(--blue);
+  transform: rotate(-4deg);
+}
+
+.scarf::after {
+  content: "";
+  position: absolute;
+  width: 58px;
+  height: 24px;
+  right: -42px;
+  top: 12px;
+  border-radius: 0 12px 12px 0;
+  background: var(--blue);
+  transform: rotate(12deg);
+}
+
+.weather-orbit {
+  position: absolute;
+  z-index: 4;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border: 5px solid white;
+  border-radius: 50%;
+  box-shadow: 0 12px 25px rgba(31, 78, 135, 0.18);
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.orbit-one {
+  left: 0;
+  top: 24%;
+  color: white;
+  background: var(--blue);
+}
+
+.orbit-two {
+  right: 5%;
+  top: 9%;
+  color: #8b5700;
+  background: var(--yellow);
+}
+
+.orbit-three {
+  right: 0;
+  bottom: 24%;
+  color: white;
+  background: var(--green);
+}
+
+.speech-bubble {
+  position: absolute;
+  z-index: 5;
+  right: -12px;
+  bottom: 4px;
+  max-width: 226px;
+  padding: 16px 18px;
+  border: 2px solid var(--blue-dark);
+  border-radius: 18px 18px 4px 18px;
+  color: var(--blue-dark);
+  background: var(--paper);
+  box-shadow: 6px 8px 0 rgba(15, 45, 92, 0.1);
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.6;
+}
+
+.explore-section,
+.talk-section,
+.more-hot {
+  padding: 108px 0 10px;
+}
+
+.section-heading {
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 34px;
+}
+
+.section-heading h2,
+.completion-copy h2 {
+  margin-bottom: 12px;
+  font-size: clamp(30px, 4vw, 48px);
+  letter-spacing: -0.045em;
+}
+
+.section-heading p:not(.section-label),
+.completion-copy > p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.section-label {
+  margin-bottom: 10px;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.progress-block {
+  flex: 0 0 190px;
+}
+
+.progress-block > span {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+}
+
+.progress-track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #dce5ef;
+}
+
+.progress-track span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--blue);
+  transition: width 300ms ease;
+}
+
+.box-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.box-card {
+  position: relative;
+  min-height: 310px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(219, 229, 241, 0.9);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 15px 40px rgba(28, 65, 110, 0.08);
+  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.box-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(23, 105, 224, 0.25);
+  box-shadow: 0 20px 50px rgba(28, 65, 110, 0.12);
+}
+
+.box-card.is-complete {
+  border-color: rgba(49, 168, 117, 0.35);
+  background: linear-gradient(145deg, #ffffff, #f1fbf7);
+}
+
+.box-index {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 38px;
+}
+
+.box-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: var(--blue-soft);
+  font-size: 22px;
+}
+
+.box-number {
+  color: #9aa8ba;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.box-card h3 {
+  max-width: 440px;
+  margin-bottom: 14px;
+  font-size: 25px;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+}
+
+.box-card p {
+  margin-bottom: 28px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.box-button {
+  width: fit-content;
+  margin-top: auto;
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 12px;
+  color: var(--blue);
+  background: var(--blue-soft);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 850;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.box-card.is-complete .box-button {
+  color: #257a59;
+  background: #e2f6ed;
+}
+
+.box-card.is-complete::after {
+  content: "已打开";
+  position: absolute;
+  right: 28px;
+  bottom: 30px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.talk-section[hidden] {
+  display: none;
+}
+
+.talk-section {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.65fr) minmax(420px, 1.35fr);
+  gap: 44px 58px;
+  align-items: start;
+}
+
+.completion-copy {
+  position: sticky;
+  top: 30px;
+}
+
+.talk-card {
+  position: relative;
+  padding: 42px;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  color: #f8fbff;
+  background:
+    radial-gradient(circle at 95% 3%, rgba(255, 216, 107, 0.28), transparent 16rem),
+    linear-gradient(145deg, #0f2d5c, #155cb4 74%, #1769e0);
+  box-shadow: 0 30px 65px rgba(15, 45, 92, 0.3);
+}
+
+.talk-card::before {
+  content: "山";
+  position: absolute;
+  right: -6px;
+  bottom: -80px;
+  color: rgba(255, 255, 255, 0.06);
+  font-size: 260px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.talk-card-head {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 34px;
+}
+
+.talk-card-head span {
+  color: #9dc8ff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+}
+
+.talk-card h3 {
+  margin: 7px 0 0;
+  font-size: 38px;
+  letter-spacing: -0.04em;
+}
+
+.passport-stamp {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--yellow);
+  border-radius: 50%;
+  color: var(--yellow);
+  font-size: 12px;
+  font-weight: 900;
+  transform: rotate(10deg);
+}
+
+.talk-card ol {
+  position: relative;
+  margin: 0 0 32px;
+  padding: 0;
+  list-style: none;
+  counter-reset: talk-points;
+}
+
+.talk-card li {
+  counter-increment: talk-points;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  line-height: 1.55;
+}
+
+.talk-card li::before {
+  content: counter(talk-points, decimal-leading-zero);
+  color: var(--yellow);
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1.8;
+}
+
+.talk-opener {
+  position: relative;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.talk-opener span {
+  color: var(--yellow);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.talk-opener p {
+  margin: 8px 0 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+.talk-footer {
+  position: relative;
+  margin: 22px 0 0;
+  color: #b8d3f5;
+  font-size: 11px;
+}
+
+.talk-actions {
+  grid-column: 2;
+}
+
+.more-hot {
+  padding-bottom: 100px;
+}
+
+.section-heading.compact {
+  align-items: flex-end;
+}
+
+.cache-time {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.hot-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.hot-item {
+  min-height: 190px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.82);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.hot-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(23, 105, 224, 0.35);
+}
+
+.hot-item > span {
+  width: fit-content;
+  margin-bottom: 18px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  color: var(--blue);
+  background: var(--blue-soft);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.hot-item h3 {
+  margin-bottom: 14px;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.hot-item p {
+  margin: auto 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer {
+  padding: 30px 20px 50px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer p {
+  margin-bottom: 8px;
+}
+
+footer a {
+  color: var(--blue);
+  text-underline-offset: 3px;
+}
+
+.knowledge-dialog {
+  width: min(720px, calc(100% - 32px));
+  max-height: min(88vh, 860px);
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 28px;
+  background: var(--paper);
+  box-shadow: 0 35px 90px rgba(8, 30, 60, 0.35);
+}
+
+.knowledge-dialog::backdrop {
+  background: rgba(10, 27, 51, 0.62);
+  backdrop-filter: blur(6px);
+}
+
+.dialog-shell {
+  position: relative;
+  padding: 42px;
+}
+
+.dialog-close {
+  position: absolute;
+  z-index: 2;
+  right: 20px;
+  top: 18px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  color: var(--muted);
+  background: #edf2f7;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.dialog-label {
+  margin-bottom: 14px;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.dialog-shell h2 {
+  max-width: 590px;
+  margin-bottom: 14px;
+  font-size: clamp(28px, 5vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+.dialog-intro {
+  margin-bottom: 26px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.option-list {
+  display: grid;
+  gap: 10px;
+}
+
+.option-button {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  color: var(--ink);
+  background: white;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.option-button:hover {
+  border-color: rgba(23, 105, 224, 0.45);
+  background: var(--blue-soft);
+}
+
+.option-letter {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: var(--blue);
+  background: var(--blue-soft);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.reveal {
+  animation: reveal-in 280ms ease both;
+}
+
+.answer-result {
+  margin-bottom: 22px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  color: #31516f;
+  background: #edf5ff;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.answer-result strong {
+  color: var(--blue);
+}
+
+.knowledge-headline {
+  margin-bottom: 24px;
+  padding-left: 18px;
+  border-left: 5px solid var(--yellow);
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.explanation-list {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.explanation-item {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  color: #43546b;
+  line-height: 1.7;
+}
+
+.explanation-item span:first-child {
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.misconception,
+.takeaway {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  line-height: 1.65;
+}
+
+.misconception {
+  color: #7a5420;
+  background: #fff5df;
+}
+
+.takeaway {
+  color: #1f5e48;
+  background: #eaf8f2;
+}
+
+.misconception strong,
+.takeaway strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.source-list {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.source-list > span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.source-list a {
+  display: block;
+  margin-top: 7px;
+  color: var(--blue);
+  font-size: 12px;
+  line-height: 1.5;
+  text-underline-offset: 3px;
+}
+
+.dialog-next {
+  width: 100%;
+  margin-top: 26px;
+}
+
+.toast {
+  position: fixed;
+  z-index: 20;
+  left: 50%;
+  bottom: 28px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  color: white;
+  background: var(--blue-dark);
+  box-shadow: 0 12px 30px rgba(10, 30, 60, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 12px);
+  transition: opacity 180ms ease, transform 180ms ease;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.load-error {
+  padding: 28px;
+  border: 1px solid #ffd1d1;
+  border-radius: 16px;
+  color: #7c3737;
+  background: #fff3f3;
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: auto;
+    padding: 58px 44px;
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    min-height: 390px;
+  }
+
+  .box-grid,
+  .hot-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .talk-section {
+    grid-template-columns: 1fr;
+  }
+
+  .completion-copy {
+    position: static;
+  }
+
+  .talk-actions {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header,
+  main {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .site-header {
+    min-height: 66px;
+  }
+
+  .brand small,
+  .live-status span:last-child {
+    display: none;
+  }
+
+  .case-switcher {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .case-switcher > div {
+    width: 100%;
+  }
+
+  .case-switcher button {
+    min-width: 0;
+    flex: 1;
+    padding: 9px 11px;
+    font-size: 11px;
+  }
+
+  .hero {
+    padding: 38px 22px 28px;
+    border-radius: 28px;
+  }
+
+  h1 {
+    font-size: 39px;
+  }
+
+  .topic-summary {
+    font-size: 15px;
+  }
+
+  .hero-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .primary-button {
+    width: 100%;
+  }
+
+  .hero-visual {
+    min-height: 330px;
+  }
+
+  .mascot-shell {
+    width: 260px;
+  }
+
+  .weather-orbit {
+    width: 48px;
+    height: 48px;
+  }
+
+  .speech-bubble {
+    right: 0;
+    max-width: 190px;
+  }
+
+  .explore-section,
+  .talk-section,
+  .more-hot {
+    padding-top: 76px;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .progress-block {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .progress-block > span {
+    text-align: left;
+  }
+
+  .box-grid,
+  .hot-list {
+    grid-template-columns: 1fr;
+  }
+
+  .box-card {
+    min-height: 280px;
+    padding: 24px;
+  }
+
+  .talk-card,
+  .dialog-shell {
+    padding: 28px 22px;
+  }
+
+  .talk-card h3 {
+    font-size: 32px;
+  }
+
+  .passport-stamp {
+    width: 64px;
+    height: 64px;
+    font-size: 10px;
+  }
+
+  .talk-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .knowledge-dialog {
+    width: calc(100% - 18px);
+    max-height: 92vh;
+    border-radius: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+</style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="看山热知识首页">
+        <span class="brand-mark" aria-hidden="true">山</span>
+        <span>
+          <strong>看山热知识</strong>
+          <small>热点背后的知识盲盒</small>
+        </span>
+      </a>
+      <div class="live-status" aria-label="数据状态">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="data-status">已审核缓存</span>
+      </div>
+    </header>
+
+    <main id="top">
+      <nav class="case-switcher" aria-label="选择热点演示案例">
+        <span>DEMO CASES</span>
+        <div>
+          <button type="button" data-topic-id="loongson" aria-pressed="true">
+            <small>实时热榜 #4</small>
+            龙芯“狗剩”百万片
+          </button>
+          <button type="button" data-topic-id="typhoon" aria-pressed="false">
+            <small>公共生活</small>
+            北京“台风雨”
+          </button>
+        </div>
+      </nav>
+
+      <section class="hero" aria-labelledby="topic-title">
+        <div class="hero-copy">
+          <div class="eyebrow-row">
+            <span class="hot-rank" id="topic-rank">今日热榜</span>
+            <span class="topic-time" id="topic-time"></span>
+          </div>
+          <p class="hero-kicker">今天大家都在聊</p>
+          <h1 id="topic-title">热点加载中…</h1>
+          <p class="topic-summary" id="topic-summary"></p>
+          <div class="fact-strip" id="fact-strip" aria-label="事件要点"></div>
+          <div class="hero-actions">
+            <button class="primary-button" id="start-button" type="button">
+              <span>和看山一起开箱</span>
+              <span aria-hidden="true">→</span>
+            </button>
+            <a class="text-link" id="topic-source" href="#" target="_blank" rel="noreferrer">
+              先看热点原文
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="刘看山发现了四个知识暗门">
+          <div class="weather-orbit orbit-one" id="orbit-one" aria-hidden="true">芯</div>
+          <div class="weather-orbit orbit-two" id="orbit-two" aria-hidden="true">100万</div>
+          <div class="weather-orbit orbit-three" id="orbit-three" aria-hidden="true">？</div>
+          <div class="mascot-shell">
+            <img
+              class="mascot-image"
+              id="mascot-image"
+              src="data:image/png;base64,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"
+              alt="刘看山"
+            />
+            <div class="mascot-fallback" id="mascot-fallback" aria-hidden="true">
+              <span class="ear ear-left"></span>
+              <span class="ear ear-right"></span>
+              <span class="face">
+                <i class="eye eye-left"></i>
+                <i class="eye eye-right"></i>
+                <i class="nose"></i>
+              </span>
+              <span class="scarf"></span>
+            </div>
+          </div>
+          <div class="speech-bubble" id="speech-bubble"></div>
+        </div>
+      </section>
+
+      <section class="explore-section" id="explore" aria-labelledby="explore-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">KNOWLEDGE DOORS</p>
+            <h2 id="explore-title">刘看山发现了 4 个知识暗门</h2>
+            <p>先猜一下，再看热点背后的原理、尺度、制度和轶事。</p>
+          </div>
+          <div class="progress-block" aria-live="polite">
+            <span id="progress-label">0 / 4 已打开</span>
+            <div class="progress-track" aria-hidden="true">
+              <span id="progress-bar"></span>
+            </div>
+          </div>
+        </div>
+        <div class="box-grid" id="box-grid"></div>
+      </section>
+
+      <section class="talk-section" id="talk-section" aria-labelledby="talk-title" hidden>
+        <div class="completion-copy">
+          <p class="section-label">TODAY'S TALK CARD</p>
+          <h2 id="talk-title">今天，有的聊了</h2>
+          <p>四个知识暗门已经打开。刘看山替你整理了一张可以直接带走的谈资卡。</p>
+        </div>
+        <article class="talk-card" id="talk-card">
+          <div class="talk-card-head">
+            <div>
+              <span>今天有的聊</span>
+              <h3 id="talk-topic">台风雨</h3>
+            </div>
+            <div class="passport-stamp" aria-label="刘看山知识护照已盖章">看山认证</div>
+          </div>
+          <ol id="talk-points"></ol>
+          <div class="talk-opener">
+            <span>自然开场</span>
+            <p id="talk-opener"></p>
+          </div>
+          <p class="talk-footer">来源可追溯 · 观点有上下文 · 最后更新 <span id="card-time"></span></p>
+        </article>
+        <div class="talk-actions">
+          <button class="primary-button" id="copy-button" type="button">复制开场白</button>
+          <button class="secondary-button" id="reset-button" type="button">再走一遍</button>
+        </div>
+      </section>
+
+      <section class="more-hot" aria-labelledby="more-title">
+        <div class="section-heading compact">
+          <div>
+            <p class="section-label">FROM ZHIHU CLI</p>
+            <h2 id="more-title">下一条，想看懂什么？</h2>
+          </div>
+          <span class="cache-time" id="hot-cache-time"></span>
+        </div>
+        <div class="hot-list" id="hot-list"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>热榜负责告诉你今天发生了什么，看山负责带你看见热点背后的知识。</p>
+      <a href="https://developer.zhihu.com/docs?key=zhihu_cli" target="_blank" rel="noreferrer">
+        由 Zhihu CLI 提供热点与社区内容能力
+      </a>
+    </footer>
+
+    <dialog class="knowledge-dialog" id="knowledge-dialog">
+      <form method="dialog" class="dialog-shell">
+        <button class="dialog-close" value="close" aria-label="关闭知识盲盒">×</button>
+        <div id="dialog-content"></div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module">
+const els = {
+  topicButtons: [...document.querySelectorAll("[data-topic-id]")],
+  topicRank: document.querySelector("#topic-rank"),
+  topicTime: document.querySelector("#topic-time"),
+  topicTitle: document.querySelector("#topic-title"),
+  topicSummary: document.querySelector("#topic-summary"),
+  topicSource: document.querySelector("#topic-source"),
+  factStrip: document.querySelector("#fact-strip"),
+  startButton: document.querySelector("#start-button"),
+  boxGrid: document.querySelector("#box-grid"),
+  progressLabel: document.querySelector("#progress-label"),
+  progressBar: document.querySelector("#progress-bar"),
+  talkSection: document.querySelector("#talk-section"),
+  talkTopic: document.querySelector("#talk-topic"),
+  talkPoints: document.querySelector("#talk-points"),
+  talkOpener: document.querySelector("#talk-opener"),
+  cardTime: document.querySelector("#card-time"),
+  copyButton: document.querySelector("#copy-button"),
+  resetButton: document.querySelector("#reset-button"),
+  hotList: document.querySelector("#hot-list"),
+  hotCacheTime: document.querySelector("#hot-cache-time"),
+  dataStatus: document.querySelector("#data-status"),
+  dialog: document.querySelector("#knowledge-dialog"),
+  dialogContent: document.querySelector("#dialog-content"),
+  toast: document.querySelector("#toast"),
+  mascotImage: document.querySelector("#mascot-image"),
+  mascotFallback: document.querySelector("#mascot-fallback"),
+  orbitOne: document.querySelector("#orbit-one"),
+  orbitTwo: document.querySelector("#orbit-two"),
+  orbitThree: document.querySelector("#orbit-three"),
+  speechBubble: document.querySelector("#speech-bubble")
+};
+
+const state = {
+  payload: null,
+  payloads: [],
+  hotList: null,
+  completed: new Set(),
+  completedByTopic: new Map(),
+  activeBox: null
+};
+
+const formatter = new Intl.DateTimeFormat("zh-CN", {
+  month: "numeric",
+  day: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: false
+});
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function formatTime(value) {
+  const date = new Date(value);
+  return Number.isNaN(date.valueOf()) ? "时间待确认" : formatter.format(date);
+}
+
+const embeddedData = {"data/hot-topic.json":{"id":"typhoon","updatedAt":"2026-08-12T10:00:00+08:00","mode":"reviewed-cache","topic":{"rank":"今日热榜 #14","category":"公共生活","shortTitle":"台风雨","title":"台风已经停编，为什么北京仍然下起了“台风雨”？","summary":"8 月 12 日，北京出现明显强降雨，暴雨预警与防汛响应同时生效。热点告诉我们雨来了，刘看山想带你看看：水汽从哪来、两个等级有什么区别、毫米究竟有多大，以及台风名字为何也会“退役”。","facts":["热点持续更新中","暴雨预警生效","防汛响应启动","预计探索 3 分钟"],"sourceUrl":"https://www.zhihu.com/question/2070230875938054245","talkOpener":"你知道台风已经停编了，为什么北京还会下“台风雨”吗？","visualTokens":["雨","?","知"],"bubble":"新闻你可能看过，\n但里面还藏着四个门道。","boxes":[{"id":"water-vapor","type":"mechanism","label":"原来如此盒","icon":"☁️","clue":"主角已经退场，影响却刚刚抵达。","question":"台风已经停编，为什么北京仍可能出现“台风雨”？","options":["台风中心其实已经直接移动到了北京","台风相关水汽仍在输送，遇到冷空气或地形抬升后形成降雨","城市热岛效应会在原地制造一场台风"],"answer":1,"answerNote":"多数人的第一直觉会把“台风停编”理解成“所有影响立即结束”，但天气系统并不是一个开关。","headline":"台风停编，不等于它输送的暖湿水汽立即消失。","explanation":["“停编”表示热带气旋已经不再满足继续编号和发布的条件，不代表空气中的水汽同时清零。","暖湿水汽可以继续向北输送，遇到冷空气、辐合或地形抬升后冷却凝结，形成明显降雨。","新闻中的“台风雨”描述的是水汽来源和天气影响，并不等于台风中心抵达北京。"],"misconception":"不要把“台风停编”和“相关风险解除”画等号，后续降雨仍需看当地预警。","talkLine":"台风像一台已经熄火的运输车，但它送来的“水汽货物”还在路上。","sources":[{"title":"知乎热点：台风雨抵达北京","url":"https://www.zhihu.com/question/2070230875938054245"}]},{"id":"warning-response","type":"system","label":"制度说明书盒","icon":"🚦","clue":"新闻里同时出现两个等级，它们不是一张成绩单。","question":"“暴雨橙色预警”和“防汛二级响应”最主要的区别是什么？","options":["完全没有区别，只是两个部门用了不同名字","一个描述天气风险，一个组织城市采取防汛行动","橙色永远比二级严重，二者可以直接比较高低"],"answer":1,"answerNote":"它们经常同时出现在新闻标题里，所以很容易被看作两个可直接比较的危险等级。","headline":"一个告诉你天气可能有多危险，一个决定城市如何行动。","explanation":["暴雨预警主要依据降雨强度、持续时间等气象条件，向公众提示可能出现的天气危险。","防汛响应由防汛部门综合考虑洪水、山洪、内涝、地质灾害和城市运行等风险后启动。","北京防汛响应从四级到一级逐级升高，一级最高，二级是第二高等级。"],"misconception":"橙色和二级属于不同体系，不宜简单问“哪一个更大”。","talkLine":"暴雨预警像天气危险评分，防汛响应更像城市行动工单。","sources":[{"title":"北京市防汛应急预案（2024 年修订）","url":"https://yjglj.beijing.gov.cn/art/2024/4/11/art_2522_674642.html"},{"title":"北京市暴雨灾害公众防御指引","url":"https://yjglj.beijing.gov.cn/art/2016/3/18/art_2762_244302.html"}]},{"id":"rainfall-scale","type":"scale","label":"数字有多大盒","icon":"📏","clue":"175.6 毫米听起来不大，换个单位就不一样了。","question":"气象中的“降雨量 175.6 毫米”最准确表示什么？","options":["雨水均匀铺在水平面且不流失时，水深约 17.56 厘米","每一滴雨的直径都是 175.6 毫米","所有河流的水位都会统一上涨 175.6 毫米"],"answer":0,"answerNote":"毫米是长度单位，但在降雨量里，它描述的是一定面积上累积雨水折算后的水深。","headline":"175.6 毫米落在一公顷上，约等于 1756 吨水。","explanation":["175.6 毫米等于 0.1756 米；如果雨水没有蒸发、渗透或流走，平地水深约为 17.56 厘米。","一公顷是 10,000 平方米，乘以 0.1756 米，可得 1,756 立方米水。","一立方米水约重一吨，因此对应约 1,756 吨水；短时间集中降下时，对排水系统压力更大。"],"misconception":"城市风险不仅看累计降雨量，还要看雨强、持续时间、地形和排水能力。","talkLine":"175.6 毫米的雨落在一公顷上，相当于突然来了约 1756 吨水。","sources":[{"title":"知乎热点中的北京降雨实况与讨论","url":"https://www.zhihu.com/question/2070230875938054245"}]},{"id":"typhoon-names","type":"story","label":"奇闻轶事盒","icon":"🐬","clue":"台风名字不是一次性的，有些还会永远“退役”。","question":"关于西北太平洋台风名字，哪一种说法是正确的？","options":["每次台风形成后，由网友临时投票起名","名字来自一张循环使用的命名表，部分名字可能被除名","全世界台风都只使用英文字母和数字编号"],"answer":1,"answerNote":"“白海豚”听起来很像一次性的可爱昵称，其实它属于正式命名体系。","headline":"台风名字循环使用，也会像球衣号码一样“退役”。","explanation":["西北太平洋和南海热带气旋使用具有亚洲风格的命名表，名称由台风委员会相关成员提供。","命名表中的名字按顺序循环使用，并非每次出现台风时临时创作。","造成严重灾害或因特殊原因不宜继续使用的名字可能被除名，空缺再由原提供方推荐替代名称。"],"misconception":"台风中文名不是媒体自行翻译的网络昵称，而是正式命名体系的一部分。","talkLine":"台风名字也会退役，有点像球队不再使用一位传奇球员的号码。","sources":[{"title":"中国气象局：9 个台风新名正式启用","url":"https://www.cma.gov.cn/ztbd/2024zt/20240402/2023032402/202406/t20240606_6330115.html"}]}]}},"data/hot-topic-loongson.json":{"id":"loongson","updatedAt":"2026-08-12T03:47:23.754Z","mode":"live-cli","topic":{"rank":"今日热榜 #4","category":"科技","shortTitle":"龙芯 3A6000","title":"从“狗剩”到百万片，国产龙芯走过了什么？","summary":"龙芯 3A6000 主流行业出货量突破 100 万片登上知乎热榜。数字之外，刘看山想带你看懂：为什么它曾叫“狗剩”、指令集究竟是什么、百万出货说明了什么，以及为什么造好 CPU 还只是生态的起点。","facts":["实时热榜 #4","主流行业出货超 100 万片","从 2002 到 2026","预计探索 3 分钟"],"sourceUrl":"https://www.zhihu.com/question/2070058112137140135","talkOpener":"你知道国产龙芯最早为什么有个“狗剩”的小名吗？","visualTokens":["芯","100万","？"],"bubble":"从“狗剩”到百万片，\n这里藏着四个门道。","boxes":[{"id":"godson-name","type":"story","label":"奇闻轶事盒","icon":"🐕","clue":"这个听起来很土的小名，其实藏着团队的愿望。","question":"早期龙芯为什么会有“狗剩”这个小名？","options":["早期英文名 Godson 与中文小名相联，团队取“贱名”寄望它好养活","第一代芯片由一位叫狗剩的工程师独立设计","网友把 3A6000 跑分较低的工程样片临时这样称呼"],"answer":0,"answerNote":"它不是网友后来给 3A6000 起的黑称，而是龙芯早期研发史中的正式小名。","headline":"“狗剩”对应早期英文名 Godson，也寄托着“名字朴素、容易养大”的心愿。","explanation":["中科院计算所资料记载，龙芯 1 号早期英文名为 Godson，团队把“狗剩”当作它的中文小名。","胡伟武解释过这个名字的朴素寓意：给新生事物取个“贱名”，盼它能经得住困难、慢慢长大。","2002 年 8 月 10 日清晨，首台装有龙芯 1 号 CPU 的计算机成功启动；二十多年后的百万片节点，让这个小名有了完整的成长叙事。"],"misconception":"“狗剩”指向龙芯早期历史，不是 3A6000 的正式型号，也不代表对国产芯片性能的评价。","talkLine":"龙芯早期叫 Godson，中文小名“狗剩”，是科研团队盼它“好养活、能长大”的朴素愿望。","sources":[{"title":"中科院计算所：胡伟武“做产品就像养孩子”","url":"https://www.ict.ac.cn/xwgg/mtwz/202502/t20250207_7525315.html"},{"title":"中科院计算所：孕育“龙芯”的 478 个日夜","url":"https://www.ict.ac.cn/xwgg/mtwz/202502/t20250207_7525357.html"}]},{"id":"instruction-set","type":"mechanism","label":"原来如此盒","icon":"📖","clue":"CPU 也要先学会一套“字典和语法”。","question":"“龙架构指令集”最接近下面哪种解释？","options":["印在芯片外壳上的品牌标识，与软件无关","软件与 CPU 约定的基本指令、寄存器和运行规则","制造芯片时使用的纳米制程名称"],"answer":1,"answerNote":"指令集看不见，却决定了软件用什么方式向处理器下达最基础的计算命令。","headline":"指令集像 CPU 的“字典和语法”，微架构则是它把命令执行得多快的方法。","explanation":["指令集架构定义处理器能理解哪些指令、有哪些寄存器、数据如何表示，以及软件和硬件如何衔接。","龙芯官方资料称，LoongArch 从顶层架构、指令功能到 ABI 标准均为自主设计，无需国外授权。","3A6000 是第四代微架构的首款产品，集成 4 个 LA664 处理器核并支持同时多线程，共有 8 个逻辑核。"],"misconception":"自主指令集不等于所有旧软件自动兼容；应用仍需要原生适配、重新编译或借助翻译技术。","talkLine":"CPU 性能像阅读速度，指令集则像它识字所用的字典和语法。","sources":[{"title":"龙芯中科：新一代处理器龙芯 3A6000","url":"https://www.loongson.cn/news/show?id=623"},{"title":"龙架构参考手册（基础架构）","url":"https://www.loongson.cn/uploads/images/2025032109191292796.%E9%BE%99%E6%9E%B6%E6%9E%84%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C%E5%8D%B7%E4%B8%80_r1p11.pdf"}]},{"id":"million-shipped","type":"scale","label":"数字有多大盒","icon":"📦","clue":"100 万很醒目，但先要看清它统计的是什么。","question":"“主流行业出货量突破 100 万片”最直接说明什么？","options":["全球每一千台电脑里就一定有一台使用 3A6000","这款芯片已在特定行业形成百万量级出货，而非只停留在样片阶段","已经有 100 万名个人消费者每天在家中使用它"],"answer":1,"answerNote":"“主流行业”“出货量”和“片”都是边界词，理解里程碑之前要先保留这些限定。","headline":"百万出货证明产品跨过了规模化门槛，但不等于百万活跃用户或全球市场份额。","explanation":["龙芯中科披露的是 3A6000 桌面处理器在主流行业的累计出货量，口径并非全球零售销量。","出货量不能直接换算成已装机数、活跃用户数或市场占有率，因此不宜做这些外推。","它的产业意义在于：更多真实部署能带来兼容性反馈、供应链验证和软件适配动力，帮助产品继续迭代。"],"misconception":"“出货”不一定等于终端已经售出或正在使用；评价商业化还要结合客户结构、收入、复购和生态。","talkLine":"这 100 万片最重要的不是凑成一个大数，而是说明它已从实验室样片走进规模化部署。","sources":[{"title":"龙芯中科：3A6000 主流行业出货突破 100 万片","url":"https://www.loongson.cn/news/show?id=835"},{"title":"知乎热榜：龙芯 3A6000 百万片意味着什么","url":"https://www.zhihu.com/question/2070058112137140135"}]},{"id":"software-ecosystem","type":"system","label":"生态说明书盒","icon":"🧩","clue":"一颗芯片跑得快，还要有人替它把路修通。","question":"为什么更换 CPU 架构通常不只是“把芯片插上去”这么简单？","options":["不同架构只能使用不同形状的键盘和显示器","操作系统、编译器、驱动、运行时和应用都要形成兼容链条","每种 CPU 架构都必须重新发明互联网协议"],"answer":1,"answerNote":"用户看到的是一个应用图标，背后却站着固件、系统、工具链、运行时和驱动等很多层。","headline":"造出 CPU 像修好路基；生态决定路上有没有车、加油站和目的地。","explanation":["应用最终需要转换为目标指令集能执行的代码，所以编译器、系统库和运行时必须支持相应架构。","龙芯的 Loongnix 基础系统维护内核、GCC、LLVM、Java、Node.js、Qt、Electron 等基础软件环境，并强调统一系统架构和 API。","原生适配、开源社区支持和二进制翻译可以共同降低迁移门槛，但每款具体应用的体验仍需实际验证。"],"misconception":"某项基准性能达到相近水平，不代表所有软件在两种平台上的兼容性和体验完全相同。","talkLine":"造 CPU 是修路基，操作系统、编译器和应用生态才是路上的车、加油站和目的地。","sources":[{"title":"龙芯中科：Loongnix 基础版操作系统","url":"https://www.loongson.cn/index.php/system/loongnix"},{"title":"龙芯中科：新一代处理器龙芯 3A6000","url":"https://www.loongson.cn/news/show?id=623"}]}]}},"data/hot-list.json":{"updatedAt":"2026-08-12T03:47:23.754Z","source":"zhihu-cli","items":[{"title":"胖东来公布侵犯员工尊严案例，顾客驾车顶撞员工被行拘、掌掴员工被起诉，员工获上万元赔偿，如何看待此事？","url":"https://www.zhihu.com/question/2070467817976210988","thumbnailUrl":"https://pic4.zhimg.com/v2-82b9c204992cb690a5dd85b243ce4ddf.jpg","summary":"8月10日，胖东来通过官方社交媒体账号公布了两起侵犯员工人格尊严的典型案例，被侵犯的员工分别获得1万元和5万元补偿。目前，其中一起涉及精神疾病患者的案件已进入民事诉讼程序。 [图片] 被车顶撞补偿1万，肇事者行拘6日 据胖东来公示信息，2026年2月11日，新乡门店公共安全部员工武某某在执勤期间，发现一名顾客驾驶车辆违规插队，多次上前制止。该顾客不听劝阻，驾车顶撞员工武某某向前行驶，在场其他员工共同制止车辆行驶后，车主驶…"},{"title":"怎么看 DeepSeek 注册 Harness 公众号并选用黑鲸鱼 logo ？","url":"https://www.zhihu.com/question/2070437867311174069","thumbnailUrl":"https://pic4.zhimg.com/v2-f5f6a3673125badea580fb4e4ae416a7.jpg","summary":"DeepSeek Harness 的 Logo 是一只黑色鲸鱼 [图片] [图片] [图片]"},{"title":"为什么国内大学都不愿意改善学生的住宿条件，比如四人间升级为双人间甚至单人间？","url":"https://www.zhihu.com/question/2036433829762691742","thumbnailUrl":"https://pic4.zhimg.com/v2-6444c1924faae26ec005683fcb24540b.jpg","summary":""},{"title":"曾被戏称为「狗剩」的国产龙芯，其 3A6000 出货量突破百万，这对国产 CPU 发展有何意义？","url":"https://www.zhihu.com/question/2070058112137140135","thumbnailUrl":"https://pic3.zhimg.com/v2-984f92f62389e1f74a7f2c21bdbe400a.jpg","summary":"2002年8月10日凌晨，中科院计算所北楼105房间，安装了“龙芯1号”CPU（通用处理器）的计算机顺利启动。作为我国首款自主研发的通用CPU，“龙芯1号”因此被载入中国科技创新史。 如今，24年过去，龙芯已经更迭多代，最新款龙芯3A6000桌面处理器主流行业出货量突破100万片，意味着国产CPU正实现从“可用”到“好用”的跨越式升级。 抚今追昔，时间印证了彼时判断的清醒，也为接下来的攻坚指引了方向。 （一） 龙芯的故事，要从振聋…"},{"title":"「人民艺术家」郭兰英逝世，享年 97 岁，代表作有《我的祖国》《南泥湾》等，她的哪些作品令你印象深刻？","url":"https://www.zhihu.com/question/2070707063454537374","thumbnailUrl":"https://pic3.zhimg.com/v2-9de0bd53127c23c7e8ae6d19714efc46.jpg","summary":"[图片] 中国歌剧舞剧院发布讣告，中国共产党优秀党员，“人民艺术家”国家荣誉称号获得者，“最美奋斗者”荣誉称号获得者，“中国文联终身成就戏剧家”荣誉称号获得者，第一、二、三、五、六届全国人民代表大会代表，中国歌剧舞剧院一级演员，著名歌剧表演艺术家郭兰英同志，因病于2026年8月11日17时14分在广州逝世，享年97岁。 [图片] 多部作品成为传唱至今的经典一条大河波浪宽，风吹稻花香两岸。 每当这熟悉的旋律响起，人们总是不由自主地…"},{"title":"百万粉丝网红姜小柔去世，年仅 24 岁，还有哪些信息值得关注？","url":"https://www.zhihu.com/question/2070280309057263511","thumbnailUrl":"https://pic4.zhimg.com/v2-44c5136a0d015eeb96eec37eef15a8c7.jpg","summary":"“从此以后柔姐就不能陪伴大家了，因为（她）7月15日凌晨从广西回广州的途中发生了车祸，因伤势严重送往医院，救治时已经陷入昏迷和无呼吸状态等症状，医生已经尽全力救治了，最后因伤势严重导致离开了……希望大家不要再乱说乱传了，祝柔姐一路走好、一路平安。” 近日，一位自称为网红姜小柔助理和徒弟的网友称，拥有超百万粉丝的女网红姜小柔因车祸去世，消息引发网友广泛关注。 该网友发出的一张中山大学孙逸仙纪念医院的《…"},{"title":"如何看待京东上大规模出现「李鬼」笔记本电脑？","url":"https://www.zhihu.com/question/2070197481544201908","thumbnailUrl":"https://pic1.zhimg.com/v2-9787293927d0e7504425877ef638144c.jpg","summary":"[图片] [图片] [图片] [图片] [图片]"},{"title":"深圳大学拟拿出5.3亿元，买下整栋商品房给学生当宿舍，背后有哪些考量？买商品房当宿舍会成为趋势吗？","url":"https://www.zhihu.com/question/2070596779347916555","thumbnailUrl":"https://pic3.zhimg.com/v2-17dcd01d0faed8d0942ccb5e8e2215fe.jpg","summary":"8月3日，深圳公共资源交易中心挂出一则采购结果公告，深圳大学花8057.07万元租下南山西丽汉园茗院264套住房；租期三年。 租楼落定同期，深大另一头还挂了一笔更大的账：在中国·深圳政府采购网发布商品房购置意向，拟拿出5.336亿元，买下整栋商品房给学生当宿舍。 一边8057万租三年，一边5.3亿买产权，深大把“租赁+购置”两套方案同时摆上桌：短期靠租赁264套房救急2026级新生入住，中长期靠买楼把校外宿舍资产化。深大官网8月5…"},{"title":"「台风雨」抵达北京，局地有大暴雨，全市启动防汛二级应急响应，你那里情况如何？雨大吗？","url":"https://www.zhihu.com/question/2070230875938054245","thumbnailUrl":"https://pic1.zhimg.com/v2-c1d3dc3e5b90320c0af9758f88c86b04.jpg","summary":"8月12日早晨到夜间，阴有暴雨，局地大暴雨；白天偏东风二级左右，最高气温27℃；夜间东转北风一二级，最低气温23℃。暴雨橙色和雷电黄色预警信号中，今天早晨至白天降雨明显，夜间至明天白天逐渐减弱，出行请注意防范。 北京今天最高气温27℃ 局地有大暴雨 “台风雨”已抵达北京。从雷达图上看，降雨回波正在自南向北移动，傍晚前后北京降雨将逐渐增强，晚高峰出行请注意防雷避雨和交通安全。 过去1小时，北京最大降水量出现在顺…"},{"title":"曝 10 万亿参数的 GPT-6 即将发布，10 万亿参数是什么水平？对此你有哪些期待？","url":"https://www.zhihu.com/question/2070445459840000945","thumbnailUrl":"https://pic1.zhimg.com/v2-d1e1e7d8cc952a8e6c6797fd7d3738c8.jpg","summary":"10万亿参数的GPT-6，即将于本月发布！ 就在刚刚，X上传来惊爆消息。 AI内幕记者ChrisGPT爆料，即使顶着政府审查的压力，GPT-6 （Astra）仍将在8月发布。 [图片] GPT-6，就是昨天OpenAI紧急暂停发布的模型Astra。 9个月前，OpenAI开始发力，重新分配计算资源。意识到Anthropic在预训练上领先，OpenAI着急了！ [图片] 据估计GPT-4的参数约为1.8万亿。如果Astra参数真的10万亿，那就是GPT-4的五倍以上。 不管怎么说， OpenAI都在预训练上砸出了…"},{"title":"巴、沙、土三国共同防务协议只是代表了中东新局面吗？背后要注意什么 ？","url":"https://www.zhihu.com/question/2070097432243966870","thumbnailUrl":"https://pic2.zhimg.com/v2-17eb2caf53dc9a5341d93c1f9cc56831.jpg","summary":"新华社开罗/伊斯坦布尔8月9日电（记者吴宝澍程睿泽罗晨）沙特阿拉伯、土耳其和巴基斯坦三国7日在沙特城市麦加签署《麦加共同防务协议》，其中“一国受袭、共同响应”的条款备受关注。 分析人士指出，三国“抱团”的背后，既有近期中东安全形势恶化的现实压力，也反映出地区国家对美国安全承诺信心不足。三国寻求安全防务合作多元化，或将对地区局势产生长远影响，但这一防务协议的实际效果将如何仍有待观察。 https://baijiahao.baidu.com/s?id=1873089214424873170&wfr=spider&for=pc …"},{"title":"普通人就算有钱，为什么慎重购买别墅？","url":"https://www.zhihu.com/question/2059460521213146058","thumbnailUrl":"https://pic4.zhimg.com/v2-1d59f248542fe1bdcb41e9bab27f1283.jpg","summary":"大家都羡慕别墅庭院宽敞，居住环境安静舒适。可不少普通家庭咬牙买下别墅，入住一段时间之后满心后悔。"},{"title":"短剧演员自曝富婆带资进组演女主，给自己硬加 60 多场吻戏，短剧上线仅数日便被下架，如何看待此事？","url":"https://www.zhihu.com/question/2069387389651215691","thumbnailUrl":"https://pic4.zhimg.com/v2-1db2348c5c2a15e33ab5fc518bea8b1b.jpg","summary":"近日，短剧演员钟宇飞自曝片场被富婆投资方加拍到60余场吻戏，全剧也就50多集，对方亲自担任女主角，硬性加入大量亲密戏，更在拍摄中伸舌越界输送口水，其坦言因对方既是女主角又是资方，自己刚入行不敢得罪。据悉，该短剧上线仅数日便被平台下架。 富婆带资进组当女主，50集短剧给自己硬加60多场吻戏，男演员钟宇飞崩溃自曝：刚入行，不敢得罪只能强忍，该剧因吻戏过多，资方未支付后期制作费用，已下架_腾讯新闻"},{"title":"NBA公布26-27赛季常规赛赛程，詹姆斯连续八年打揭幕战，这体现了他在联盟中怎样的地位？","url":"https://www.zhihu.com/question/2070559888154145150","thumbnailUrl":"https://pic4.zhimg.com/v2-c7fe1333663b46069c0360f28f4c8447.jpg","summary":"北京时间8月12日消息，NBA官方确认2026-27赛季完整常规赛赛程将于北京时间8月15日凌晨3点发布。据联盟公布的揭幕战安排，今夏底薪加盟费城76人的勒布朗·詹姆斯，将随队客场挑战卫冕冠军尼克斯。这意味着詹姆斯将连续第8个赛季站上NBA揭幕战舞台，目前他生涯揭幕战总得分已达到549分，高居NBA历史第一。[5] 詹姆斯是2003年NBA选秀状元，职业生涯先后效力骑士、热火、湖人。2025-26赛季结束后，他离开效力8年的湖人，以2年800万美…"},{"title":"《影之刃零》正式开启预售，标准版268元，甄子丹出演核心角色，11分钟实机视频全程高能，如何评价？","url":"https://www.zhihu.com/question/2070811856655198163","thumbnailUrl":"https://pic1.zhimg.com/v2-31ba8282c9128eb213599c0f42e92eec.jpg","summary":"8月12日上午10点，《影之刃零》正式开启全平台预售： 1）标准版268元，豪华版328元。 2）功夫巨星甄子丹重磅加盟，这是国产单机游戏首次邀请世界级动作明星参与核心角色的塑造。 3）11分钟实机视频引爆全网，炫目的动作设计和强烈的视听冲击赢得玩家的广泛好评。 这个价格是否符合预期？甄子丹的亮相算不算双厨狂喜?11分钟实机视频你会打几分？欢迎大家畅所欲言。"},{"title":"如何评价米哈游旗下AI互动陪伴产品《BSide: Olivia Lin》宣告停止运营？","url":"https://www.zhihu.com/question/2070534573788751684","thumbnailUrl":"https://pic2.zhimg.com/v2-9930874c2db4401bc6ad76f28af2de85.jpg","summary":"关联问题： 如何评价林离Olivia桌面软件《BSide: Olivia Lin》登录Steam抢先体验？ 公告原文： Steam - 《BSide: Olivia Lin》停止运营公告 [图片]"},{"title":"东莞招教师将其称作「课时服务人员」，网友质疑老师变为服务者，如何看待这一称呼的转变？会弱化教师身份吗？","url":"https://www.zhihu.com/question/2070470862801737396","thumbnailUrl":"https://pic2.zhimg.com/v2-5b74e49a2377352fcf5f2752a92c635d.jpg","summary":"近日，网友称东莞人才人力资源服务有限公司向社会招聘课时服务人员，引发关注：“为何叫课时服务人员，而非教师”“与教师是否有区别”“待遇是否有变化”“权责是否会变”“为何不由学校招聘”……另有人认为名称上的改变，老师或从教育者变为服务者。 [图片] △网友曾对此提出质疑。 年薪10万+，取代临聘教师，参与教学工作 教育局：可理解为用人单位向公司“购买服务”潇湘晨报·晨视频记者注意到，东莞中学公众号也曾转发类似信息，…"},{"title":"李嘉诚再抛售海外资产，估值最多为 166 亿港元，如何理解这一举动？长江实业为何频繁出售海外资产？","url":"https://www.zhihu.com/question/2070444805600047561","thumbnailUrl":"https://pic3.zhimg.com/v2-1da618fd840cd11b189b3df6825462a6.jpg","summary":"李嘉诚家族再度启动出售海外资产，这一次是澳洲能源企业EDL Energy。 根据澳洲当地财经媒体消息，李嘉诚家族旗下长江基建（长建）已委托摩根士丹利及巴克莱，启动出售旗下澳洲可持续分布式能源生产商EDL Energy的持股，估值预计介于20亿至30亿澳元，折合约110.8亿至166.6亿港元。 公开资料显示，EDL Energy主要从事洁净及可再生电力、可再生天然气及远程可再生能源业务，主要客户包括嘉能可及力拓等。2025年，EDL Energy管理层调…"},{"title":"美记称詹姆斯 23 年生涯未主动申请交易，为何公众对其忠诚度评价两极分化？","url":"https://www.zhihu.com/question/2070593750850613303","thumbnailUrl":"https://pic2.zhimg.com/v2-e208d8cec886229744e39fe0b0c9d2c1.jpg","summary":"今日，雅虎体育记者Damien Peters发推评价了詹姆斯，他写道：“勒布朗·詹姆斯是NBA历史上征战赛季最多的球员。然而在这漫长的23载岁月中，他从未主动提出过交易申请。每一份合同皆善始善终，每一项义务皆恪尽己责。但世人鲜少将‘忠诚’二字与他挂钩，当你白纸黑字签下的每一份合约都逐一兑现时，这份坚守又该作何衡量？” 美记：詹姆斯23年生涯从未主动申请交易 世人鲜少将忠诚与他挂钩"},{"title":"今年「984.5 高校」升温了吗？报考这些新型研究型大学的优劣势都有哪些？","url":"https://www.zhihu.com/question/2070509397264917490","thumbnailUrl":"https://pic3.zhimg.com/v2-b259e652b9f71c0732a75b134b65f9fe.jpg","summary":"今年高考录取，有个词火得一塌糊涂：“984.5”高校。什么意思呢？ 就是有一批大学，没有985的“帽子”，但录取分数线却实实在在地超过了985，它们就是“新型研究型大学”。南方科技大学、深圳理工大学、西湖大学、福耀科技大学，在各自所在省份的录取最低位次均高于本省的985“老大哥”——中山大学、浙江大学、厦门大学。 这说明，许多高分尖子生的第一志愿，正在从985转向这一批新秀。甘肃一位656分的考生，明明够得上中科大、…"}]}};
+
+async function loadJson(url) {
+  const data = embeddedData[url];
+  if (!data) throw new Error(`找不到内嵌数据：${url}`);
+  return structuredClone(data);
+}
+
+function setupMascot() {
+  const showOfficial = () => {
+    els.mascotImage.style.display = "block";
+    els.mascotFallback.style.display = "none";
+  };
+  const showFallback = () => {
+    els.mascotImage.style.display = "none";
+    els.mascotFallback.style.display = "block";
+  };
+
+  els.mascotImage.addEventListener("load", showOfficial);
+  els.mascotImage.addEventListener("error", showFallback);
+
+  if (els.mascotImage.complete) {
+    if (els.mascotImage.naturalWidth > 0) showOfficial();
+    else showFallback();
+  }
+}
+
+function renderTopic() {
+  const { topic, updatedAt, mode } = state.payload;
+  els.topicRank.textContent = topic.rank;
+  els.topicTime.textContent = `更新于 ${formatTime(updatedAt)}`;
+  els.topicTitle.textContent = topic.title;
+  els.topicSummary.textContent = topic.summary;
+  els.topicSource.href = topic.sourceUrl;
+  els.dataStatus.textContent = mode === "live-cli" ? "Zhihu CLI 实时数据" : "已审核缓存";
+  els.factStrip.innerHTML = topic.facts
+    .map((fact) => `<span class="fact-chip">${escapeHtml(fact)}</span>`)
+    .join("");
+
+  const tokens = topic.visualTokens || ["知", "?", "山"];
+  els.orbitOne.textContent = tokens[0];
+  els.orbitTwo.textContent = tokens[1];
+  els.orbitThree.textContent = tokens[2];
+  els.speechBubble.innerHTML = escapeHtml(topic.bubble || "热点背后，藏着四个门道。")
+    .replaceAll("\n", "<br>");
+}
+
+function switchTopic(id, updateUrl = true) {
+  const payload = state.payloads.find((item) => item.id === id);
+  if (!payload) return;
+
+  if (els.dialog.open) els.dialog.close();
+  state.payload = payload;
+  state.completed = state.completedByTopic.get(id) || new Set();
+  state.completedByTopic.set(id, state.completed);
+  state.activeBox = null;
+  els.talkSection.hidden = state.completed.size !== payload.topic.boxes.length;
+
+  els.topicButtons.forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.topicId === id));
+  });
+
+  if (updateUrl) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("case", id);
+    window.history.replaceState({}, "", url);
+  }
+
+  renderTopic();
+  renderBoxes();
+  updateProgress();
+  if (state.completed.size === payload.topic.boxes.length) renderTalkCard();
+}
+
+function renderBoxes() {
+  const boxes = state.payload.topic.boxes;
+  els.boxGrid.innerHTML = boxes
+    .map((box, index) => {
+      const complete = state.completed.has(box.id);
+      return `
+        <article class="box-card${complete ? " is-complete" : ""}" data-box-id="${escapeHtml(box.id)}">
+          <div class="box-index">
+            <span class="box-icon" aria-hidden="true">${escapeHtml(box.icon)}</span>
+            <span class="box-number">DOOR ${String(index + 1).padStart(2, "0")}</span>
+          </div>
+          <h3>${escapeHtml(box.clue)}</h3>
+          <p>${escapeHtml(box.label)} · 先猜一下，再看答案</p>
+          <button class="box-button" type="button" data-open-box="${escapeHtml(box.id)}">
+            ${complete ? "再看一次" : "打开这扇门"}
+          </button>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function updateProgress() {
+  const total = state.payload.topic.boxes.length;
+  const count = state.completed.size;
+  els.progressLabel.textContent = `${count} / ${total} 已打开`;
+  els.progressBar.style.width = `${(count / total) * 100}%`;
+
+  if (count === total) {
+    renderTalkCard();
+  }
+}
+
+function renderQuestion(box) {
+  els.dialogContent.innerHTML = `
+    <div class="dialog-label">${escapeHtml(box.label)}</div>
+    <h2>${escapeHtml(box.question)}</h2>
+    <p class="dialog-intro">先凭直觉选一个。选错没关系，直觉也是理解知识的一条路。</p>
+    <div class="option-list">
+      ${box.options
+        .map(
+          (option, index) => `
+            <button class="option-button" type="button" data-answer="${index}">
+              <span class="option-letter">${String.fromCharCode(65 + index)}</span>
+              <span>${escapeHtml(option)}</span>
+            </button>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+
+  els.dialogContent.querySelectorAll("[data-answer]").forEach((button) => {
+    button.addEventListener("click", () => revealAnswer(box, Number(button.dataset.answer)));
+  });
+}
+
+function revealAnswer(box, selectedIndex) {
+  const isCorrect = selectedIndex === box.answer;
+  state.completed.add(box.id);
+  renderBoxes();
+  updateProgress();
+
+  const sources = box.sources
+    .map(
+      (source) => `
+        <a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">
+          ${escapeHtml(source.title)} ↗
+        </a>
+      `
+    )
+    .join("");
+
+  els.dialogContent.innerHTML = `
+    <div class="reveal">
+      <div class="dialog-label">${escapeHtml(box.label)} · 已揭晓</div>
+      <div class="answer-result">
+        <strong>${isCorrect ? "判断很准。" : "这个选项很像正确答案。"}</strong>
+        ${escapeHtml(box.answerNote)}
+      </div>
+      <div class="knowledge-headline">${escapeHtml(box.headline)}</div>
+      <div class="explanation-list">
+        ${box.explanation
+          .map(
+            (item, index) => `
+              <div class="explanation-item">
+                <span>${index + 1}</span>
+                <span>${escapeHtml(item)}</span>
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+      <div class="misconception">
+        <strong>容易误解的地方</strong>
+        ${escapeHtml(box.misconception)}
+      </div>
+      <div class="takeaway">
+        <strong>拿去聊</strong>
+        ${escapeHtml(box.talkLine)}
+      </div>
+      <div class="source-list">
+        <span>继续看原文</span>
+        ${sources}
+      </div>
+      <button class="primary-button dialog-next" type="button" id="dialog-next">
+        ${state.completed.size === state.payload.topic.boxes.length ? "生成今天的谈资卡" : "收下这个知识点"}
+      </button>
+    </div>
+  `;
+
+  els.dialogContent.querySelector("#dialog-next").addEventListener("click", () => {
+    els.dialog.close();
+    if (state.completed.size === state.payload.topic.boxes.length) {
+      els.talkSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+}
+
+function openBox(id) {
+  const box = state.payload.topic.boxes.find((item) => item.id === id);
+  if (!box) return;
+  state.activeBox = box;
+  renderQuestion(box);
+  els.dialog.showModal();
+}
+
+function renderTalkCard() {
+  const { topic, updatedAt } = state.payload;
+  els.talkSection.hidden = false;
+  els.talkTopic.textContent = topic.shortTitle;
+  els.talkOpener.textContent = topic.talkOpener;
+  els.cardTime.textContent = formatTime(updatedAt);
+  els.talkPoints.innerHTML = topic.boxes
+    .map((box) => `<li>${escapeHtml(box.talkLine)}</li>`)
+    .join("");
+}
+
+function renderHotList() {
+  const { items, updatedAt, source } = state.hotList;
+  const sourceLabel = source === "zhihu-cli" ? "CLI 热榜" : "CLI 缓存样例";
+  els.hotCacheTime.textContent = `${sourceLabel} · ${formatTime(updatedAt)}`;
+  els.hotList.innerHTML = items
+    .slice(0, 6)
+    .map(
+      (item, index) => `
+        <a class="hot-item" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">
+          <span>候选 ${String(index + 1).padStart(2, "0")}</span>
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.summary || "等待刘看山发现知识暗门")}</p>
+        </a>
+      `
+    )
+    .join("");
+}
+
+function showToast(message) {
+  els.toast.textContent = message;
+  els.toast.classList.add("is-visible");
+  window.setTimeout(() => els.toast.classList.remove("is-visible"), 1800);
+}
+
+async function copyOpener() {
+  const text = state.payload.topic.talkOpener;
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast("开场白已复制");
+  } catch {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.append(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    textarea.remove();
+    showToast("开场白已复制");
+  }
+}
+
+function resetExperience() {
+  state.completed.clear();
+  state.activeBox = null;
+  els.talkSection.hidden = true;
+  renderBoxes();
+  updateProgress();
+  document.querySelector("#explore").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function bindEvents() {
+  els.topicButtons.forEach((button) => {
+    button.addEventListener("click", () => switchTopic(button.dataset.topicId));
+  });
+
+  els.startButton.addEventListener("click", () => {
+    document.querySelector("#explore").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  els.boxGrid.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-open-box]");
+    if (button) openBox(button.dataset.openBox);
+  });
+
+  els.copyButton.addEventListener("click", copyOpener);
+  els.resetButton.addEventListener("click", resetExperience);
+}
+
+function renderLoadError(error) {
+  els.topicTitle.textContent = "热点暂时迷路了";
+  els.topicSummary.innerHTML = `<span class="load-error">${escapeHtml(error.message)}。请稍后刷新，或检查本地静态服务器是否正常。</span>`;
+  els.startButton.disabled = true;
+  console.error(error);
+}
+
+async function init() {
+  setupMascot();
+  bindEvents();
+
+  try {
+    const [typhoonPayload, loongsonPayload, hotList] = await Promise.all([
+      loadJson("data/hot-topic.json"),
+      loadJson("data/hot-topic-loongson.json"),
+      loadJson("data/hot-list.json")
+    ]);
+    state.payloads = [loongsonPayload, typhoonPayload];
+    state.hotList = hotList;
+    renderHotList();
+    const requestedCase = new URLSearchParams(window.location.search).get("case");
+    switchTopic(requestedCase || "loongson", false);
+  } catch (error) {
+    renderLoadError(error);
+  }
+}
+
+init();
+
+</script>
+  </body>
+</html>
