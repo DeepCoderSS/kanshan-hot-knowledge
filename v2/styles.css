@@ -181,10 +181,15 @@ main > section, footer { width: min(1180px, calc(100% - 40px)); margin-left: aut
 .talkCard li { margin-bottom: 9px; }
 .talkCard blockquote { margin: 22px 0 0; padding: 18px; border-radius: 14px; color: #102b55; background: white; font-weight: 800; }
 .talkCard blockquote small { display: block; margin-bottom: 5px; color: var(--blue); }
-.talkResult { min-width: 0; }
-.talkMascot { min-height: 310px; margin-top: 18px; display: grid; place-items: start center; overflow: hidden; }
-.talkMascot img { width: min(360px,82%); margin: -12px auto -52px; filter: drop-shadow(0 20px 24px rgba(24,64,115,.14)); animation: talkFloat 4.8s ease-in-out infinite; }
-@keyframes talkFloat { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-8px) rotate(1deg); } }
+.talkIntro { min-width: 0; }
+.talkMascot { position: relative; min-height: 270px; margin-top: 22px; display: grid; place-items: center; overflow: hidden; }
+.talkMascot img { width: min(235px,72%); filter: drop-shadow(0 18px 20px rgba(24,64,115,.13)); animation: talkFloat 4.8s ease-in-out infinite; }
+.talkBook { position: absolute; left: 50%; bottom: 30px; width: 154px; height: 80px; transform: translateX(-50%); filter: drop-shadow(0 10px 10px rgba(24,64,115,.16)); }
+.talkBook::before, .talkBook::after { content: ""; position: absolute; top: 0; bottom: 0; width: 50%; border: 3px solid var(--blue-dark); background: linear-gradient(160deg,#fffdf3,#ffe8a5); }
+.talkBook::before { left: 0; border-radius: 12px 3px 9px 12px; transform: skewY(8deg); transform-origin: right bottom; }
+.talkBook::after { right: 0; border-radius: 3px 12px 12px 9px; transform: skewY(-8deg); transform-origin: left bottom; }
+.talkBook i { position: absolute; z-index: 2; left: 50%; top: 4px; bottom: 3px; width: 3px; border-radius: 999px; background: var(--blue-dark); transform: translateX(-50%); }
+@keyframes talkFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
 .passportSection { padding-bottom: 105px; }
 .passportSection > div:first-child { max-width: 750px; }
 .benefitGrid { margin-top: 32px; display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; }
@@ -271,8 +276,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid rgba(23,105,224,.3); 
   .boxCard { min-height: 270px; }
   .talkSection { padding-top: 80px; gap: 28px; }
   .talkCard, .knowledgeModal { padding: 28px 22px; }
-  .talkMascot { min-height: 250px; margin-top: 12px; }
-  .talkMascot img { width: min(320px,92%); }
+  .talkMascot { min-height: 240px; margin-top: 12px; }
+  .talkMascot img { width: min(220px,70%); }
+  .talkBook { bottom: 20px; }
   .passportSection { padding-bottom: 75px; }
   footer { grid-template-columns: 1fr; gap: 8px; }
   .modalBackdrop { padding: 9px; }
