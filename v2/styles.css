@@ -108,8 +108,7 @@ main > section, footer { width: min(1180px, calc(100% - 40px)); margin-left: aut
 .liveWorkbench > header > div { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .liveWorkbench h3 { margin: 0; font-size: 22px; letter-spacing: -.025em; }
 .liveWorkbench > header p { margin: 0; color: var(--muted); font-size: 12px; }
-.liveWorkbench > header button, .hotItem button, .hotPageLink { border: 0; border-radius: 12px; color: white; background: var(--blue); cursor: pointer; font-weight: 850; }
-.liveWorkbench > header button { min-height: 40px; padding: 0 16px; white-space: nowrap; }
+.hotItem button, .hotPageLink { border: 0; border-radius: 12px; color: white; background: var(--blue); cursor: pointer; font-weight: 850; }
 .liveWorkbench button:disabled { cursor: wait; opacity: .58; }
 .livePulse { display: inline-flex; align-items: center; gap: 7px; padding: 6px 9px; border-radius: 8px; color: #08784c; background: #daf7ea; font-size: 10px; font-weight: 950; letter-spacing: .09em; }
 .livePulse i { width: 7px; height: 7px; border-radius: 50%; background: #18ae70; box-shadow: 0 0 0 4px rgba(24,174,112,.13); animation: livePulse 1.7s infinite; }
@@ -269,7 +268,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid rgba(23,105,224,.3); 
   .sectionIntro { align-items: flex-start; flex-direction: column; gap: 14px; }
   .liveWorkbench { padding: 18px 14px; }
   .liveWorkbench > header { align-items: flex-start; flex-direction: column; }
-  .liveWorkbench > header button { width: 100%; }
   .hotListRail { grid-auto-columns: minmax(245px, 85%); }
   .caseTabs, .boxGrid, .benefitGrid { grid-template-columns: 1fr; }
   .caseTabs button { grid-template-columns: 1fr auto; }

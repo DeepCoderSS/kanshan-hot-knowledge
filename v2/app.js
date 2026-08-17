@@ -1,6 +1,5 @@
 const els = {
   startButton: document.querySelector("#start-button"),
-  snapshotButton: document.querySelector("#snapshot-button"),
   snapshotNotice: document.querySelector("#snapshot-notice"),
   snapshotTime: document.querySelector("#snapshot-time"),
   hotList: document.querySelector("#hot-list-rail"),
@@ -245,9 +244,6 @@ function closeModal() {
 
 function bindEvents() {
   els.startButton.addEventListener("click", () => document.querySelector("#cases").scrollIntoView({ behavior: "smooth" }));
-  els.snapshotButton.addEventListener("click", () => {
-    els.snapshotNotice.hidden = !els.snapshotNotice.hidden;
-  });
   els.hotList.addEventListener("click", (event) => {
     const button = event.target.closest("[data-topic-id]");
     if (button) chooseTopic(button.dataset.topicId, true);
