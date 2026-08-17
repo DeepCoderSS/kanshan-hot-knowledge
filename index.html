@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="看山热知识：打开热点背后的知识盲盒，让你不只知道，还能聊出门道。"
+      content="看山有门道：从知乎热榜出发，打开热点背后的知识盲盒。"
     />
-    <title>看山热知识｜热点背后的知识盲盒</title>
+    <title>看山有门道｜热点背后的知识盲盒</title>
     <style>
 :root {
   --blue: #1769e0;
@@ -150,12 +150,18 @@ main {
 }
 
 .case-switcher > div {
+  min-width: 0;
+  flex: 1;
   display: flex;
   gap: 10px;
+  overflow-x: auto;
+  padding: 3px 3px 10px;
+  scrollbar-width: thin;
 }
 
 .case-switcher button {
-  min-width: 170px;
+  min-width: 190px;
+  flex: 0 0 190px;
   padding: 10px 15px;
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -360,7 +366,7 @@ a:focus-visible {
 .mascot-shell {
   position: relative;
   z-index: 2;
-  width: min(330px, 82%);
+  width: min(370px, 96%);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
@@ -476,39 +482,133 @@ a:focus-visible {
   transform: rotate(12deg);
 }
 
-.weather-orbit {
+.visual-decor {
   position: absolute;
+  inset: 0;
   z-index: 4;
-  width: 58px;
-  height: 58px;
-  display: grid;
-  place-items: center;
-  border: 5px solid white;
+  pointer-events: none;
+}
+
+.decor-route {
+  position: absolute;
+  left: 9%;
+  top: 32%;
+  width: 78%;
+  height: 42%;
+  border-top: 1px dashed rgba(23, 105, 224, 0.28);
   border-radius: 50%;
-  box-shadow: 0 12px 25px rgba(31, 78, 135, 0.18);
-  font-size: 18px;
-  font-weight: 900;
+  transform: rotate(-9deg);
 }
 
-.orbit-one {
-  left: 0;
-  top: 24%;
-  color: white;
-  background: var(--blue);
+.decor-route::after {
+  content: "";
+  position: absolute;
+  right: 7%;
+  top: -4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #82b4f9;
+  box-shadow: 0 0 13px rgba(23, 105, 224, 0.55);
+  animation: route-pulse 3.8s ease-in-out infinite;
 }
 
-.orbit-two {
-  right: 5%;
-  top: 9%;
-  color: #8b5700;
-  background: var(--yellow);
+.decor-star {
+  position: absolute;
+  right: 10%;
+  top: 12%;
+  color: #f7b928;
+  filter: drop-shadow(0 0 8px rgba(247, 185, 40, 0.32));
+  font-size: 24px;
+  font-style: normal;
+  line-height: 1;
+  animation: decor-twinkle 4.6s ease-in-out infinite;
 }
 
-.orbit-three {
-  right: 0;
-  bottom: 24%;
-  color: white;
-  background: var(--green);
+.decor-star::before {
+  content: "✦";
+}
+
+.decor-bulb {
+  position: absolute;
+  left: 11%;
+  bottom: 16%;
+  width: 16px;
+  height: 19px;
+  border: 2px solid #e9a91d;
+  border-radius: 50% 50% 42% 42%;
+  background: rgba(255, 216, 107, 0.22);
+  box-shadow: 0 0 12px rgba(247, 185, 40, 0.24);
+  animation: bulb-glow 4.6s -2.2s ease-in-out infinite;
+}
+
+.decor-bulb::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  bottom: -6px;
+  height: 4px;
+  border-top: 2px solid #e9a91d;
+  border-bottom: 2px solid rgba(233, 169, 29, 0.7);
+}
+
+.decor-note {
+  position: absolute;
+  width: 58px;
+  height: 42px;
+  border: 1px solid rgba(23, 105, 224, 0.14);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 12px 24px rgba(4, 19, 43, 0.08);
+  backdrop-filter: blur(8px);
+  animation: decor-drift 6s ease-in-out infinite;
+}
+
+.decor-note::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 11px;
+  height: 1px;
+  background: rgba(23, 105, 224, 0.3);
+  box-shadow: 0 8px 0 rgba(23, 105, 224, 0.2), 0 16px 0 rgba(23, 105, 224, 0.12);
+}
+
+.decor-note-one {
+  left: 3%;
+  top: 10%;
+  transform: rotate(-7deg);
+}
+
+.decor-note-two {
+  right: 3%;
+  top: 31%;
+  width: 48px;
+  height: 56px;
+  transform: rotate(7deg);
+  animation-delay: -3s;
+}
+
+@keyframes route-pulse {
+  0%, 100% { opacity: 0.45; transform: scale(0.72); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes decor-twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.78) rotate(0); }
+  45% { opacity: 1; transform: scale(1.08) rotate(45deg); }
+}
+
+@keyframes bulb-glow {
+  0%, 100% { opacity: 0.4; transform: scale(0.88); }
+  45% { opacity: 1; transform: scale(1.08); box-shadow: 0 0 18px rgba(247, 185, 40, 0.42); }
+}
+
+@keyframes decor-drift {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -5px; }
 }
 
 .speech-bubble {
@@ -848,6 +948,10 @@ a:focus-visible {
   border-radius: var(--radius-md);
   text-decoration: none;
   background: rgba(255, 255, 255, 0.82);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
   transition: transform 180ms ease, border-color 180ms ease;
 }
 
@@ -874,8 +978,14 @@ a:focus-visible {
 }
 
 .hot-item p {
-  margin: auto 0 0;
+  margin: 0 0 18px;
   color: var(--muted);
+  font-size: 12px;
+}
+
+.hot-item strong {
+  margin-top: auto;
+  color: var(--blue);
   font-size: 12px;
 }
 
@@ -1191,7 +1301,7 @@ footer a {
 
   .case-switcher button {
     min-width: 0;
-    flex: 1;
+    flex: 0 0 160px;
     padding: 9px 11px;
     font-size: 11px;
   }
@@ -1224,11 +1334,6 @@ footer a {
 
   .mascot-shell {
     width: 260px;
-  }
-
-  .weather-orbit {
-    width: 48px;
-    height: 48px;
   }
 
   .speech-bubble {
@@ -1308,32 +1413,23 @@ footer a {
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="看山热知识首页">
+      <a class="brand" href="#top" aria-label="看山有门道首页">
         <span class="brand-mark" aria-hidden="true">山</span>
         <span>
-          <strong>看山热知识</strong>
+          <strong>看山有门道</strong>
           <small>热点背后的知识盲盒</small>
         </span>
       </a>
       <div class="live-status" aria-label="数据状态">
         <span class="status-dot" aria-hidden="true"></span>
-        <span id="data-status">已审核缓存</span>
+        <span id="data-status">知乎 CLI 最新快照</span>
       </div>
     </header>
 
     <main id="top">
       <nav class="case-switcher" aria-label="选择热点演示案例">
-        <span>DEMO CASES</span>
-        <div>
-          <button type="button" data-topic-id="loongson" aria-pressed="true">
-            <small>实时热榜 #4</small>
-            龙芯“狗剩”百万片
-          </button>
-          <button type="button" data-topic-id="typhoon" aria-pressed="false">
-            <small>公共生活</small>
-            北京“台风雨”
-          </button>
-        </div>
+        <span>HOT 10 · 选择一条热榜</span>
+        <div id="topic-switcher"></div>
       </nav>
 
       <section class="hero" aria-labelledby="topic-title">
@@ -1358,9 +1454,13 @@ footer a {
         </div>
 
         <div class="hero-visual" aria-label="刘看山发现了四个知识暗门">
-          <div class="weather-orbit orbit-one" id="orbit-one" aria-hidden="true">芯</div>
-          <div class="weather-orbit orbit-two" id="orbit-two" aria-hidden="true">100万</div>
-          <div class="weather-orbit orbit-three" id="orbit-three" aria-hidden="true">？</div>
+          <div class="visual-decor" aria-hidden="true">
+            <i class="decor-route"></i>
+            <i class="decor-star"></i>
+            <i class="decor-bulb"></i>
+            <i class="decor-note decor-note-one"></i>
+            <i class="decor-note decor-note-two"></i>
+          </div>
           <div class="mascot-shell">
             <img
               class="mascot-image"
@@ -1430,8 +1530,8 @@ footer a {
       <section class="more-hot" aria-labelledby="more-title">
         <div class="section-heading compact">
           <div>
-            <p class="section-label">FROM ZHIHU CLI</p>
-            <h2 id="more-title">下一条，想看懂什么？</h2>
+            <p class="section-label">ZHIHU CLI · LATEST SNAPSHOT</p>
+            <h2 id="more-title">最新热榜前 10 条，想先看懂哪条？</h2>
           </div>
           <span class="cache-time" id="hot-cache-time"></span>
         </div>
@@ -1442,7 +1542,7 @@ footer a {
     <footer>
       <p>热榜负责告诉你今天发生了什么，看山负责带你看见热点背后的知识。</p>
       <a href="https://developer.zhihu.com/docs?key=zhihu_cli" target="_blank" rel="noreferrer">
-        由 Zhihu CLI 提供热点与社区内容能力
+        由知乎开放平台 CLI 提供热点与社区内容能力
       </a>
     </footer>
 
@@ -1456,7 +1556,7 @@ footer a {
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script type="module">
 const els = {
-  topicButtons: [...document.querySelectorAll("[data-topic-id]")],
+  topicSwitcher: document.querySelector("#topic-switcher"),
   topicRank: document.querySelector("#topic-rank"),
   topicTime: document.querySelector("#topic-time"),
   topicTitle: document.querySelector("#topic-title"),
@@ -1482,9 +1582,6 @@ const els = {
   toast: document.querySelector("#toast"),
   mascotImage: document.querySelector("#mascot-image"),
   mascotFallback: document.querySelector("#mascot-fallback"),
-  orbitOne: document.querySelector("#orbit-one"),
-  orbitTwo: document.querySelector("#orbit-two"),
-  orbitThree: document.querySelector("#orbit-three"),
   speechBubble: document.querySelector("#speech-bubble")
 };
 
@@ -1519,7 +1616,7 @@ function formatTime(value) {
   return Number.isNaN(date.valueOf()) ? "时间待确认" : formatter.format(date);
 }
 
-const embeddedData = {"data/hot-topic.json":{"id":"typhoon","updatedAt":"2026-08-12T10:00:00+08:00","mode":"reviewed-cache","topic":{"rank":"今日热榜 #14","category":"公共生活","shortTitle":"台风雨","title":"台风已经停编，为什么北京仍然下起了“台风雨”？","summary":"8 月 12 日，北京出现明显强降雨，暴雨预警与防汛响应同时生效。热点告诉我们雨来了，刘看山想带你看看：水汽从哪来、两个等级有什么区别、毫米究竟有多大，以及台风名字为何也会“退役”。","facts":["热点持续更新中","暴雨预警生效","防汛响应启动","预计探索 3 分钟"],"sourceUrl":"https://www.zhihu.com/question/2070230875938054245","talkOpener":"你知道台风已经停编了，为什么北京还会下“台风雨”吗？","visualTokens":["雨","?","知"],"bubble":"新闻你可能看过，\n但里面还藏着四个门道。","boxes":[{"id":"water-vapor","type":"mechanism","label":"原来如此盒","icon":"☁️","clue":"主角已经退场，影响却刚刚抵达。","question":"台风已经停编，为什么北京仍可能出现“台风雨”？","options":["台风中心其实已经直接移动到了北京","台风相关水汽仍在输送，遇到冷空气或地形抬升后形成降雨","城市热岛效应会在原地制造一场台风"],"answer":1,"answerNote":"多数人的第一直觉会把“台风停编”理解成“所有影响立即结束”，但天气系统并不是一个开关。","headline":"台风停编，不等于它输送的暖湿水汽立即消失。","explanation":["“停编”表示热带气旋已经不再满足继续编号和发布的条件，不代表空气中的水汽同时清零。","暖湿水汽可以继续向北输送，遇到冷空气、辐合或地形抬升后冷却凝结，形成明显降雨。","新闻中的“台风雨”描述的是水汽来源和天气影响，并不等于台风中心抵达北京。"],"misconception":"不要把“台风停编”和“相关风险解除”画等号，后续降雨仍需看当地预警。","talkLine":"台风像一台已经熄火的运输车，但它送来的“水汽货物”还在路上。","sources":[{"title":"知乎热点：台风雨抵达北京","url":"https://www.zhihu.com/question/2070230875938054245"}]},{"id":"warning-response","type":"system","label":"制度说明书盒","icon":"🚦","clue":"新闻里同时出现两个等级，它们不是一张成绩单。","question":"“暴雨橙色预警”和“防汛二级响应”最主要的区别是什么？","options":["完全没有区别，只是两个部门用了不同名字","一个描述天气风险，一个组织城市采取防汛行动","橙色永远比二级严重，二者可以直接比较高低"],"answer":1,"answerNote":"它们经常同时出现在新闻标题里，所以很容易被看作两个可直接比较的危险等级。","headline":"一个告诉你天气可能有多危险，一个决定城市如何行动。","explanation":["暴雨预警主要依据降雨强度、持续时间等气象条件，向公众提示可能出现的天气危险。","防汛响应由防汛部门综合考虑洪水、山洪、内涝、地质灾害和城市运行等风险后启动。","北京防汛响应从四级到一级逐级升高，一级最高，二级是第二高等级。"],"misconception":"橙色和二级属于不同体系，不宜简单问“哪一个更大”。","talkLine":"暴雨预警像天气危险评分，防汛响应更像城市行动工单。","sources":[{"title":"北京市防汛应急预案（2024 年修订）","url":"https://yjglj.beijing.gov.cn/art/2024/4/11/art_2522_674642.html"},{"title":"北京市暴雨灾害公众防御指引","url":"https://yjglj.beijing.gov.cn/art/2016/3/18/art_2762_244302.html"}]},{"id":"rainfall-scale","type":"scale","label":"数字有多大盒","icon":"📏","clue":"175.6 毫米听起来不大，换个单位就不一样了。","question":"气象中的“降雨量 175.6 毫米”最准确表示什么？","options":["雨水均匀铺在水平面且不流失时，水深约 17.56 厘米","每一滴雨的直径都是 175.6 毫米","所有河流的水位都会统一上涨 175.6 毫米"],"answer":0,"answerNote":"毫米是长度单位，但在降雨量里，它描述的是一定面积上累积雨水折算后的水深。","headline":"175.6 毫米落在一公顷上，约等于 1756 吨水。","explanation":["175.6 毫米等于 0.1756 米；如果雨水没有蒸发、渗透或流走，平地水深约为 17.56 厘米。","一公顷是 10,000 平方米，乘以 0.1756 米，可得 1,756 立方米水。","一立方米水约重一吨，因此对应约 1,756 吨水；短时间集中降下时，对排水系统压力更大。"],"misconception":"城市风险不仅看累计降雨量，还要看雨强、持续时间、地形和排水能力。","talkLine":"175.6 毫米的雨落在一公顷上，相当于突然来了约 1756 吨水。","sources":[{"title":"知乎热点中的北京降雨实况与讨论","url":"https://www.zhihu.com/question/2070230875938054245"}]},{"id":"typhoon-names","type":"story","label":"奇闻轶事盒","icon":"🐬","clue":"台风名字不是一次性的，有些还会永远“退役”。","question":"关于西北太平洋台风名字，哪一种说法是正确的？","options":["每次台风形成后，由网友临时投票起名","名字来自一张循环使用的命名表，部分名字可能被除名","全世界台风都只使用英文字母和数字编号"],"answer":1,"answerNote":"“白海豚”听起来很像一次性的可爱昵称，其实它属于正式命名体系。","headline":"台风名字循环使用，也会像球衣号码一样“退役”。","explanation":["西北太平洋和南海热带气旋使用具有亚洲风格的命名表，名称由台风委员会相关成员提供。","命名表中的名字按顺序循环使用，并非每次出现台风时临时创作。","造成严重灾害或因特殊原因不宜继续使用的名字可能被除名，空缺再由原提供方推荐替代名称。"],"misconception":"台风中文名不是媒体自行翻译的网络昵称，而是正式命名体系的一部分。","talkLine":"台风名字也会退役，有点像球队不再使用一位传奇球员的号码。","sources":[{"title":"中国气象局：9 个台风新名正式启用","url":"https://www.cma.gov.cn/ztbd/2024zt/20240402/2023032402/202406/t20240606_6330115.html"}]}]}},"data/hot-topic-loongson.json":{"id":"loongson","updatedAt":"2026-08-12T03:47:23.754Z","mode":"live-cli","topic":{"rank":"今日热榜 #4","category":"科技","shortTitle":"龙芯 3A6000","title":"从“狗剩”到百万片，国产龙芯走过了什么？","summary":"龙芯 3A6000 主流行业出货量突破 100 万片登上知乎热榜。数字之外，刘看山想带你看懂：为什么它曾叫“狗剩”、指令集究竟是什么、百万出货说明了什么，以及为什么造好 CPU 还只是生态的起点。","facts":["实时热榜 #4","主流行业出货超 100 万片","从 2002 到 2026","预计探索 3 分钟"],"sourceUrl":"https://www.zhihu.com/question/2070058112137140135","talkOpener":"你知道国产龙芯最早为什么有个“狗剩”的小名吗？","visualTokens":["芯","100万","？"],"bubble":"从“狗剩”到百万片，\n这里藏着四个门道。","boxes":[{"id":"godson-name","type":"story","label":"奇闻轶事盒","icon":"🐕","clue":"这个听起来很土的小名，其实藏着团队的愿望。","question":"早期龙芯为什么会有“狗剩”这个小名？","options":["早期英文名 Godson 与中文小名相联，团队取“贱名”寄望它好养活","第一代芯片由一位叫狗剩的工程师独立设计","网友把 3A6000 跑分较低的工程样片临时这样称呼"],"answer":0,"answerNote":"它不是网友后来给 3A6000 起的黑称，而是龙芯早期研发史中的正式小名。","headline":"“狗剩”对应早期英文名 Godson，也寄托着“名字朴素、容易养大”的心愿。","explanation":["中科院计算所资料记载，龙芯 1 号早期英文名为 Godson，团队把“狗剩”当作它的中文小名。","胡伟武解释过这个名字的朴素寓意：给新生事物取个“贱名”，盼它能经得住困难、慢慢长大。","2002 年 8 月 10 日清晨，首台装有龙芯 1 号 CPU 的计算机成功启动；二十多年后的百万片节点，让这个小名有了完整的成长叙事。"],"misconception":"“狗剩”指向龙芯早期历史，不是 3A6000 的正式型号，也不代表对国产芯片性能的评价。","talkLine":"龙芯早期叫 Godson，中文小名“狗剩”，是科研团队盼它“好养活、能长大”的朴素愿望。","sources":[{"title":"中科院计算所：胡伟武“做产品就像养孩子”","url":"https://www.ict.ac.cn/xwgg/mtwz/202502/t20250207_7525315.html"},{"title":"中科院计算所：孕育“龙芯”的 478 个日夜","url":"https://www.ict.ac.cn/xwgg/mtwz/202502/t20250207_7525357.html"}]},{"id":"instruction-set","type":"mechanism","label":"原来如此盒","icon":"📖","clue":"CPU 也要先学会一套“字典和语法”。","question":"“龙架构指令集”最接近下面哪种解释？","options":["印在芯片外壳上的品牌标识，与软件无关","软件与 CPU 约定的基本指令、寄存器和运行规则","制造芯片时使用的纳米制程名称"],"answer":1,"answerNote":"指令集看不见，却决定了软件用什么方式向处理器下达最基础的计算命令。","headline":"指令集像 CPU 的“字典和语法”，微架构则是它把命令执行得多快的方法。","explanation":["指令集架构定义处理器能理解哪些指令、有哪些寄存器、数据如何表示，以及软件和硬件如何衔接。","龙芯官方资料称，LoongArch 从顶层架构、指令功能到 ABI 标准均为自主设计，无需国外授权。","3A6000 是第四代微架构的首款产品，集成 4 个 LA664 处理器核并支持同时多线程，共有 8 个逻辑核。"],"misconception":"自主指令集不等于所有旧软件自动兼容；应用仍需要原生适配、重新编译或借助翻译技术。","talkLine":"CPU 性能像阅读速度，指令集则像它识字所用的字典和语法。","sources":[{"title":"龙芯中科：新一代处理器龙芯 3A6000","url":"https://www.loongson.cn/news/show?id=623"},{"title":"龙架构参考手册（基础架构）","url":"https://www.loongson.cn/uploads/images/2025032109191292796.%E9%BE%99%E6%9E%B6%E6%9E%84%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C%E5%8D%B7%E4%B8%80_r1p11.pdf"}]},{"id":"million-shipped","type":"scale","label":"数字有多大盒","icon":"📦","clue":"100 万很醒目，但先要看清它统计的是什么。","question":"“主流行业出货量突破 100 万片”最直接说明什么？","options":["全球每一千台电脑里就一定有一台使用 3A6000","这款芯片已在特定行业形成百万量级出货，而非只停留在样片阶段","已经有 100 万名个人消费者每天在家中使用它"],"answer":1,"answerNote":"“主流行业”“出货量”和“片”都是边界词，理解里程碑之前要先保留这些限定。","headline":"百万出货证明产品跨过了规模化门槛，但不等于百万活跃用户或全球市场份额。","explanation":["龙芯中科披露的是 3A6000 桌面处理器在主流行业的累计出货量，口径并非全球零售销量。","出货量不能直接换算成已装机数、活跃用户数或市场占有率，因此不宜做这些外推。","它的产业意义在于：更多真实部署能带来兼容性反馈、供应链验证和软件适配动力，帮助产品继续迭代。"],"misconception":"“出货”不一定等于终端已经售出或正在使用；评价商业化还要结合客户结构、收入、复购和生态。","talkLine":"这 100 万片最重要的不是凑成一个大数，而是说明它已从实验室样片走进规模化部署。","sources":[{"title":"龙芯中科：3A6000 主流行业出货突破 100 万片","url":"https://www.loongson.cn/news/show?id=835"},{"title":"知乎热榜：龙芯 3A6000 百万片意味着什么","url":"https://www.zhihu.com/question/2070058112137140135"}]},{"id":"software-ecosystem","type":"system","label":"生态说明书盒","icon":"🧩","clue":"一颗芯片跑得快，还要有人替它把路修通。","question":"为什么更换 CPU 架构通常不只是“把芯片插上去”这么简单？","options":["不同架构只能使用不同形状的键盘和显示器","操作系统、编译器、驱动、运行时和应用都要形成兼容链条","每种 CPU 架构都必须重新发明互联网协议"],"answer":1,"answerNote":"用户看到的是一个应用图标，背后却站着固件、系统、工具链、运行时和驱动等很多层。","headline":"造出 CPU 像修好路基；生态决定路上有没有车、加油站和目的地。","explanation":["应用最终需要转换为目标指令集能执行的代码，所以编译器、系统库和运行时必须支持相应架构。","龙芯的 Loongnix 基础系统维护内核、GCC、LLVM、Java、Node.js、Qt、Electron 等基础软件环境，并强调统一系统架构和 API。","原生适配、开源社区支持和二进制翻译可以共同降低迁移门槛，但每款具体应用的体验仍需实际验证。"],"misconception":"某项基准性能达到相近水平，不代表所有软件在两种平台上的兼容性和体验完全相同。","talkLine":"造 CPU 是修路基，操作系统、编译器和应用生态才是路上的车、加油站和目的地。","sources":[{"title":"龙芯中科：Loongnix 基础版操作系统","url":"https://www.loongson.cn/index.php/system/loongnix"},{"title":"龙芯中科：新一代处理器龙芯 3A6000","url":"https://www.loongson.cn/news/show?id=623"}]}]}},"data/hot-list.json":{"updatedAt":"2026-08-12T03:47:23.754Z","source":"zhihu-cli","items":[{"title":"胖东来公布侵犯员工尊严案例，顾客驾车顶撞员工被行拘、掌掴员工被起诉，员工获上万元赔偿，如何看待此事？","url":"https://www.zhihu.com/question/2070467817976210988","thumbnailUrl":"https://pic4.zhimg.com/v2-82b9c204992cb690a5dd85b243ce4ddf.jpg","summary":"8月10日，胖东来通过官方社交媒体账号公布了两起侵犯员工人格尊严的典型案例，被侵犯的员工分别获得1万元和5万元补偿。目前，其中一起涉及精神疾病患者的案件已进入民事诉讼程序。 [图片] 被车顶撞补偿1万，肇事者行拘6日 据胖东来公示信息，2026年2月11日，新乡门店公共安全部员工武某某在执勤期间，发现一名顾客驾驶车辆违规插队，多次上前制止。该顾客不听劝阻，驾车顶撞员工武某某向前行驶，在场其他员工共同制止车辆行驶后，车主驶…"},{"title":"怎么看 DeepSeek 注册 Harness 公众号并选用黑鲸鱼 logo ？","url":"https://www.zhihu.com/question/2070437867311174069","thumbnailUrl":"https://pic4.zhimg.com/v2-f5f6a3673125badea580fb4e4ae416a7.jpg","summary":"DeepSeek Harness 的 Logo 是一只黑色鲸鱼 [图片] [图片] [图片]"},{"title":"为什么国内大学都不愿意改善学生的住宿条件，比如四人间升级为双人间甚至单人间？","url":"https://www.zhihu.com/question/2036433829762691742","thumbnailUrl":"https://pic4.zhimg.com/v2-6444c1924faae26ec005683fcb24540b.jpg","summary":""},{"title":"曾被戏称为「狗剩」的国产龙芯，其 3A6000 出货量突破百万，这对国产 CPU 发展有何意义？","url":"https://www.zhihu.com/question/2070058112137140135","thumbnailUrl":"https://pic3.zhimg.com/v2-984f92f62389e1f74a7f2c21bdbe400a.jpg","summary":"2002年8月10日凌晨，中科院计算所北楼105房间，安装了“龙芯1号”CPU（通用处理器）的计算机顺利启动。作为我国首款自主研发的通用CPU，“龙芯1号”因此被载入中国科技创新史。 如今，24年过去，龙芯已经更迭多代，最新款龙芯3A6000桌面处理器主流行业出货量突破100万片，意味着国产CPU正实现从“可用”到“好用”的跨越式升级。 抚今追昔，时间印证了彼时判断的清醒，也为接下来的攻坚指引了方向。 （一） 龙芯的故事，要从振聋…"},{"title":"「人民艺术家」郭兰英逝世，享年 97 岁，代表作有《我的祖国》《南泥湾》等，她的哪些作品令你印象深刻？","url":"https://www.zhihu.com/question/2070707063454537374","thumbnailUrl":"https://pic3.zhimg.com/v2-9de0bd53127c23c7e8ae6d19714efc46.jpg","summary":"[图片] 中国歌剧舞剧院发布讣告，中国共产党优秀党员，“人民艺术家”国家荣誉称号获得者，“最美奋斗者”荣誉称号获得者，“中国文联终身成就戏剧家”荣誉称号获得者，第一、二、三、五、六届全国人民代表大会代表，中国歌剧舞剧院一级演员，著名歌剧表演艺术家郭兰英同志，因病于2026年8月11日17时14分在广州逝世，享年97岁。 [图片] 多部作品成为传唱至今的经典一条大河波浪宽，风吹稻花香两岸。 每当这熟悉的旋律响起，人们总是不由自主地…"},{"title":"百万粉丝网红姜小柔去世，年仅 24 岁，还有哪些信息值得关注？","url":"https://www.zhihu.com/question/2070280309057263511","thumbnailUrl":"https://pic4.zhimg.com/v2-44c5136a0d015eeb96eec37eef15a8c7.jpg","summary":"“从此以后柔姐就不能陪伴大家了，因为（她）7月15日凌晨从广西回广州的途中发生了车祸，因伤势严重送往医院，救治时已经陷入昏迷和无呼吸状态等症状，医生已经尽全力救治了，最后因伤势严重导致离开了……希望大家不要再乱说乱传了，祝柔姐一路走好、一路平安。” 近日，一位自称为网红姜小柔助理和徒弟的网友称，拥有超百万粉丝的女网红姜小柔因车祸去世，消息引发网友广泛关注。 该网友发出的一张中山大学孙逸仙纪念医院的《…"},{"title":"如何看待京东上大规模出现「李鬼」笔记本电脑？","url":"https://www.zhihu.com/question/2070197481544201908","thumbnailUrl":"https://pic1.zhimg.com/v2-9787293927d0e7504425877ef638144c.jpg","summary":"[图片] [图片] [图片] [图片] [图片]"},{"title":"深圳大学拟拿出5.3亿元，买下整栋商品房给学生当宿舍，背后有哪些考量？买商品房当宿舍会成为趋势吗？","url":"https://www.zhihu.com/question/2070596779347916555","thumbnailUrl":"https://pic3.zhimg.com/v2-17dcd01d0faed8d0942ccb5e8e2215fe.jpg","summary":"8月3日，深圳公共资源交易中心挂出一则采购结果公告，深圳大学花8057.07万元租下南山西丽汉园茗院264套住房；租期三年。 租楼落定同期，深大另一头还挂了一笔更大的账：在中国·深圳政府采购网发布商品房购置意向，拟拿出5.336亿元，买下整栋商品房给学生当宿舍。 一边8057万租三年，一边5.3亿买产权，深大把“租赁+购置”两套方案同时摆上桌：短期靠租赁264套房救急2026级新生入住，中长期靠买楼把校外宿舍资产化。深大官网8月5…"},{"title":"「台风雨」抵达北京，局地有大暴雨，全市启动防汛二级应急响应，你那里情况如何？雨大吗？","url":"https://www.zhihu.com/question/2070230875938054245","thumbnailUrl":"https://pic1.zhimg.com/v2-c1d3dc3e5b90320c0af9758f88c86b04.jpg","summary":"8月12日早晨到夜间，阴有暴雨，局地大暴雨；白天偏东风二级左右，最高气温27℃；夜间东转北风一二级，最低气温23℃。暴雨橙色和雷电黄色预警信号中，今天早晨至白天降雨明显，夜间至明天白天逐渐减弱，出行请注意防范。 北京今天最高气温27℃ 局地有大暴雨 “台风雨”已抵达北京。从雷达图上看，降雨回波正在自南向北移动，傍晚前后北京降雨将逐渐增强，晚高峰出行请注意防雷避雨和交通安全。 过去1小时，北京最大降水量出现在顺…"},{"title":"曝 10 万亿参数的 GPT-6 即将发布，10 万亿参数是什么水平？对此你有哪些期待？","url":"https://www.zhihu.com/question/2070445459840000945","thumbnailUrl":"https://pic1.zhimg.com/v2-d1e1e7d8cc952a8e6c6797fd7d3738c8.jpg","summary":"10万亿参数的GPT-6，即将于本月发布！ 就在刚刚，X上传来惊爆消息。 AI内幕记者ChrisGPT爆料，即使顶着政府审查的压力，GPT-6 （Astra）仍将在8月发布。 [图片] GPT-6，就是昨天OpenAI紧急暂停发布的模型Astra。 9个月前，OpenAI开始发力，重新分配计算资源。意识到Anthropic在预训练上领先，OpenAI着急了！ [图片] 据估计GPT-4的参数约为1.8万亿。如果Astra参数真的10万亿，那就是GPT-4的五倍以上。 不管怎么说， OpenAI都在预训练上砸出了…"},{"title":"巴、沙、土三国共同防务协议只是代表了中东新局面吗？背后要注意什么 ？","url":"https://www.zhihu.com/question/2070097432243966870","thumbnailUrl":"https://pic2.zhimg.com/v2-17eb2caf53dc9a5341d93c1f9cc56831.jpg","summary":"新华社开罗/伊斯坦布尔8月9日电（记者吴宝澍程睿泽罗晨）沙特阿拉伯、土耳其和巴基斯坦三国7日在沙特城市麦加签署《麦加共同防务协议》，其中“一国受袭、共同响应”的条款备受关注。 分析人士指出，三国“抱团”的背后，既有近期中东安全形势恶化的现实压力，也反映出地区国家对美国安全承诺信心不足。三国寻求安全防务合作多元化，或将对地区局势产生长远影响，但这一防务协议的实际效果将如何仍有待观察。 https://baijiahao.baidu.com/s?id=1873089214424873170&wfr=spider&for=pc …"},{"title":"普通人就算有钱，为什么慎重购买别墅？","url":"https://www.zhihu.com/question/2059460521213146058","thumbnailUrl":"https://pic4.zhimg.com/v2-1d59f248542fe1bdcb41e9bab27f1283.jpg","summary":"大家都羡慕别墅庭院宽敞，居住环境安静舒适。可不少普通家庭咬牙买下别墅，入住一段时间之后满心后悔。"},{"title":"短剧演员自曝富婆带资进组演女主，给自己硬加 60 多场吻戏，短剧上线仅数日便被下架，如何看待此事？","url":"https://www.zhihu.com/question/2069387389651215691","thumbnailUrl":"https://pic4.zhimg.com/v2-1db2348c5c2a15e33ab5fc518bea8b1b.jpg","summary":"近日，短剧演员钟宇飞自曝片场被富婆投资方加拍到60余场吻戏，全剧也就50多集，对方亲自担任女主角，硬性加入大量亲密戏，更在拍摄中伸舌越界输送口水，其坦言因对方既是女主角又是资方，自己刚入行不敢得罪。据悉，该短剧上线仅数日便被平台下架。 富婆带资进组当女主，50集短剧给自己硬加60多场吻戏，男演员钟宇飞崩溃自曝：刚入行，不敢得罪只能强忍，该剧因吻戏过多，资方未支付后期制作费用，已下架_腾讯新闻"},{"title":"NBA公布26-27赛季常规赛赛程，詹姆斯连续八年打揭幕战，这体现了他在联盟中怎样的地位？","url":"https://www.zhihu.com/question/2070559888154145150","thumbnailUrl":"https://pic4.zhimg.com/v2-c7fe1333663b46069c0360f28f4c8447.jpg","summary":"北京时间8月12日消息，NBA官方确认2026-27赛季完整常规赛赛程将于北京时间8月15日凌晨3点发布。据联盟公布的揭幕战安排，今夏底薪加盟费城76人的勒布朗·詹姆斯，将随队客场挑战卫冕冠军尼克斯。这意味着詹姆斯将连续第8个赛季站上NBA揭幕战舞台，目前他生涯揭幕战总得分已达到549分，高居NBA历史第一。[5] 詹姆斯是2003年NBA选秀状元，职业生涯先后效力骑士、热火、湖人。2025-26赛季结束后，他离开效力8年的湖人，以2年800万美…"},{"title":"《影之刃零》正式开启预售，标准版268元，甄子丹出演核心角色，11分钟实机视频全程高能，如何评价？","url":"https://www.zhihu.com/question/2070811856655198163","thumbnailUrl":"https://pic1.zhimg.com/v2-31ba8282c9128eb213599c0f42e92eec.jpg","summary":"8月12日上午10点，《影之刃零》正式开启全平台预售： 1）标准版268元，豪华版328元。 2）功夫巨星甄子丹重磅加盟，这是国产单机游戏首次邀请世界级动作明星参与核心角色的塑造。 3）11分钟实机视频引爆全网，炫目的动作设计和强烈的视听冲击赢得玩家的广泛好评。 这个价格是否符合预期？甄子丹的亮相算不算双厨狂喜?11分钟实机视频你会打几分？欢迎大家畅所欲言。"},{"title":"如何评价米哈游旗下AI互动陪伴产品《BSide: Olivia Lin》宣告停止运营？","url":"https://www.zhihu.com/question/2070534573788751684","thumbnailUrl":"https://pic2.zhimg.com/v2-9930874c2db4401bc6ad76f28af2de85.jpg","summary":"关联问题： 如何评价林离Olivia桌面软件《BSide: Olivia Lin》登录Steam抢先体验？ 公告原文： Steam - 《BSide: Olivia Lin》停止运营公告 [图片]"},{"title":"东莞招教师将其称作「课时服务人员」，网友质疑老师变为服务者，如何看待这一称呼的转变？会弱化教师身份吗？","url":"https://www.zhihu.com/question/2070470862801737396","thumbnailUrl":"https://pic2.zhimg.com/v2-5b74e49a2377352fcf5f2752a92c635d.jpg","summary":"近日，网友称东莞人才人力资源服务有限公司向社会招聘课时服务人员，引发关注：“为何叫课时服务人员，而非教师”“与教师是否有区别”“待遇是否有变化”“权责是否会变”“为何不由学校招聘”……另有人认为名称上的改变，老师或从教育者变为服务者。 [图片] △网友曾对此提出质疑。 年薪10万+，取代临聘教师，参与教学工作 教育局：可理解为用人单位向公司“购买服务”潇湘晨报·晨视频记者注意到，东莞中学公众号也曾转发类似信息，…"},{"title":"李嘉诚再抛售海外资产，估值最多为 166 亿港元，如何理解这一举动？长江实业为何频繁出售海外资产？","url":"https://www.zhihu.com/question/2070444805600047561","thumbnailUrl":"https://pic3.zhimg.com/v2-1da618fd840cd11b189b3df6825462a6.jpg","summary":"李嘉诚家族再度启动出售海外资产，这一次是澳洲能源企业EDL Energy。 根据澳洲当地财经媒体消息，李嘉诚家族旗下长江基建（长建）已委托摩根士丹利及巴克莱，启动出售旗下澳洲可持续分布式能源生产商EDL Energy的持股，估值预计介于20亿至30亿澳元，折合约110.8亿至166.6亿港元。 公开资料显示，EDL Energy主要从事洁净及可再生电力、可再生天然气及远程可再生能源业务，主要客户包括嘉能可及力拓等。2025年，EDL Energy管理层调…"},{"title":"美记称詹姆斯 23 年生涯未主动申请交易，为何公众对其忠诚度评价两极分化？","url":"https://www.zhihu.com/question/2070593750850613303","thumbnailUrl":"https://pic2.zhimg.com/v2-e208d8cec886229744e39fe0b0c9d2c1.jpg","summary":"今日，雅虎体育记者Damien Peters发推评价了詹姆斯，他写道：“勒布朗·詹姆斯是NBA历史上征战赛季最多的球员。然而在这漫长的23载岁月中，他从未主动提出过交易申请。每一份合同皆善始善终，每一项义务皆恪尽己责。但世人鲜少将‘忠诚’二字与他挂钩，当你白纸黑字签下的每一份合约都逐一兑现时，这份坚守又该作何衡量？” 美记：詹姆斯23年生涯从未主动申请交易 世人鲜少将忠诚与他挂钩"},{"title":"今年「984.5 高校」升温了吗？报考这些新型研究型大学的优劣势都有哪些？","url":"https://www.zhihu.com/question/2070509397264917490","thumbnailUrl":"https://pic3.zhimg.com/v2-b259e652b9f71c0732a75b134b65f9fe.jpg","summary":"今年高考录取，有个词火得一塌糊涂：“984.5”高校。什么意思呢？ 就是有一批大学，没有985的“帽子”，但录取分数线却实实在在地超过了985，它们就是“新型研究型大学”。南方科技大学、深圳理工大学、西湖大学、福耀科技大学，在各自所在省份的录取最低位次均高于本省的985“老大哥”——中山大学、浙江大学、厦门大学。 这说明，许多高分尖子生的第一志愿，正在从985转向这一批新秀。甘肃一位656分的考生，明明够得上中科大、…"}]}};
+const embeddedData = {"data/hot-pages.json":{"generatedAt":"2026-08-17T03:30:51.353Z","source":"Zhihu official CLI","items":[{"id":"hot-1-f7adf903","updatedAt":"2026-08-17T03:30:34.785Z","mode":"zhihu-cli-answer","topic":{"rank":"知乎最新热榜 #1","shortTitle":"DeepSeek涨价砍94%额度","title":"如何评价 DeepSeek 涨价后，OpenCode Go 套餐的 Flash 模型调用量削减94%？","summary":"DeepSeek涨价后，OpenCode Go套餐的Flash模型调用量从63300次/5小时砍至3800次，缩水94%。其根源是OpenCode按美元额度计费，上游API涨价直接传导至下游套餐，同时峰谷定价让成本进一步上升。","facts":["OpenCode Go的Flash模型5小时用量从63300次骤降至3800次，缩水94%","其额度机制按美元价值限制（5小时12美元），涨价后同等金额可调用的请求数大幅减少","DeepSeek V4 Flash在OpenCode Go中的Token用量占比高达73%，是使用量最高的模型"],"sourceUrl":"https://www.zhihu.com/question/2072481373085028433","thumbnailUrl":"https://pic3.zhimg.com/v2-02b5c659898bb14a41915798aad74352.jpg","talkOpener":"你知道现在写代码最爽的AI模型，套餐额度一夜之间缩水94%了吗？","visualTokens":["涨价","94%","AI套餐"],"bubble":"AI白菜价时代结束了吗？","boxes":[{"id":"door-1","label":"背景","icon":"📉","clue":"成本转嫁的连锁反应","question":"OpenCode Go的Flash额度为何暴跌94%？","options":["A. OpenCode故意削减用户福利","B. 上游DeepSeek涨价，按美元计费的套餐自动缩水","C. Flash模型被OpenCode主动弃用"],"answer":1,"answerNote":"OpenCode Go按美元额度限制（5小时12美元），DeepSeek API涨价后，同样的美元只能买到更少的请求次数，所以额度从63300暴跌至3800。","headline":"上游涨价，下游配额自动缩水","explanation":["OpenCode Go的额度机制是按美元价值而非请求次数计费","DeepSeek官方大幅上调API价格，尤其峰谷定价让高峰时段输出价格涨了350%","OpenCode采购成本上升，只能同步削减套餐内可调用次数"],"misconception":"很多人以为是OpenCode故意砍用户福利，其实是上游涨价自动传导的结果","talkLine":"原来套餐额度是按美元算的，模型一涨价，能用的次数自然就缩水了。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072481373085028433"}]},{"id":"door-2","label":"原理","icon":"⚙️","clue":"峰谷定价的巧妙设计","question":"DeepSeek的峰谷定价意味着什么？","options":["A. 不同用户价格不同","B. 不同时段价格不同，高峰翻倍","C. 不同模型价格不同"],"answer":1,"answerNote":"DeepSeek新定价将每天9-12点、14-18点设为高峰时段，价格为闲时两倍，高峰恰好覆盖多数开发者写代码的时间段。","headline":"高峰时段价格翻倍，AI也要错峰用电","explanation":["高峰时段（工作日9-12点、14-18点）价格是空闲时段的两倍","DeepSeek V4 Flash高峰输出从2元涨到9元/百万token，涨幅350%","峰谷定价本质是用价格杠杆引导用户错峰使用，缓解算力挤兑"],"misconception":"以为峰谷定价是单纯涨价，其实是为了分流高峰算力压力","talkLine":"以后写代码也得错峰了，AI模型现在跟电费一样分峰谷价！","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072481373085028433"}]},{"id":"door-3","label":"尺度","icon":"🔢","clue":"73000%差距的算力账","question":"DeepSeek V4 Flash在OpenCode Go中的Token占比有多高？","options":["A. 约35%","B. 约51%","C. 约73%"],"answer":2,"answerNote":"OpenCode数据显示，DeepSeek V4 Flash占Go套餐总Token用量的73%，累计处理量接近197T Token。","headline":"一个模型撑起73%的套餐用量","explanation":["V4 Flash累计处理近197T Token，是Go套餐中绝对主力","其平均Token成本极低，特别适合Coding Agent场景","该模型降价时OpenCode未同步降价，如今涨价却立刻传导给用户"],"misconception":"认为低价模型使用量占比不会太高，实际是主流选择","talkLine":"一个模型撑起73%的使用量，这才是真正的性价比之王。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072481373085028433"}]},{"id":"door-4","label":"奇闻","icon":"🤯","clue":"开发者反向复刻旧价格","question":"OpenCode创始人针对涨价采取了什么行动？","options":["A. 直接停用DeepSeek模型","B. 尝试复现此前低价方案","C. 大幅上调套餐价格"],"answer":1,"answerNote":"OpenCode创始人dax表示团队正在测试多种部署方案，尝试以接近旧价继续托管DeepSeek，但坦言“这并不容易”。","headline":"反向复刻：开发者试图用部署方案对抗涨价","explanation":["dax称数十家声称对齐旧价的供应商实际均未做到","团队正尝试复现此前的价格，但坦言“这并不容易”","有开发者甚至租GPU自行部署来绕开官方定价"],"misconception":"认为涨价后只能被动接受，实际上有人用技术手段对抗涨价","talkLine":"听说有人在研究怎么绕过涨价，AI圈的技术博弈真的很有意思。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072481373085028433"}]}]}},{"id":"hot-2-31e7a83f","updatedAt":"2026-08-17T03:30:51.093Z","mode":"zhihu-cli-answer","topic":{"rank":"知乎最新热榜 #2","shortTitle":"孩子交友该干预吗","title":"女儿交了一个保洁员家庭的朋友，我该不该“适度引导”？","summary":"女儿交到保洁员家庭的朋友，因家长群提醒引发是否该“适度引导”的困惑。核心问题在于：交友应看孩子品性而非家庭背景，家长需在干预与尊重间找到平衡。","facts":["女儿二年级，性格偏内向，与保洁员家庭同学相处愉快","多位家长私下提醒，暗示对方家庭条件一般","讨论焦点是孩子交友标准与家长引导方式"],"sourceUrl":"https://www.zhihu.com/question/2070952313695555812","thumbnailUrl":"https://pic4.zhimg.com/v2-a97eda834faf694bbb24e755f4af6b77.jpg","talkOpener":"刚看到个热榜话题，说女儿交了个保洁员家庭的朋友，家长在纠结要不要引导，你怎么看这事儿？","visualTokens":["标签","共情","边界"],"bubble":"交友看人品还是看家境？","boxes":[{"id":"door-1","label":"背景","icon":"🔍","clue":"事件起因与核心冲突","question":"该热点中女儿对朋友的喜欢，主要源于什么？","options":["对方家庭条件好","对方画画好看、贴纸多且愿意分享","对方成绩优秀"],"answer":1,"answerNote":"摘要中明确女儿主动说起同学画画好看、贴纸多还愿意交换，这是友谊产生的直接原因。","headline":"孩子的友谊始于具体互动","explanation":["二年级孩子交友更多基于共同兴趣和互动体验","家长关注的职业、家境等标签不在孩子交友考量范围内","孩子因分享贴纸等行为感到被接纳而产生好感"],"misconception":"误以为孩子交友也像成年人一样看重家庭背景","talkLine":"小孩的交友就是这么简单，她喜欢这个朋友是因为对方愿意跟她分享、玩得来。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2070952313695555812"}]},{"id":"door-2","label":"原理","icon":"🧠","clue":"家长干预方式的心理影响","question":"强行禁止孩子交友可能导致什么后果？","options":["孩子更依恋该朋友且产生逆反","孩子立刻服从家长","孩子更理性思考"],"answer":0,"answerNote":"心理学研究表明，高心理控制会使青少年更容易受同伴影响，越禁止越交往。","headline":"越禁止，孩子越逆反","explanation":["青春期孩子自主意识强，强行干预容易激发逆反心理","被禁止的友谊可能被孩子赋予“反抗权威”的意义","家长应从控制者转为引导者，教会孩子分辨而非封杀"],"misconception":"以为强硬阻止就能让孩子远离，实际反而适得其反","talkLine":"你越不让她跟谁玩，她反而越觉得那个朋友重要。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2070952313695555812"}]},{"id":"door-3","label":"尺度","icon":"📏","clue":"需要干预的危险信号","question":"以下哪种情况家长必须及时干预？","options":["朋友家庭条件普通","朋友成绩稍差但品行端正","朋友有霸凌、偷窃等行为"],"answer":2,"answerNote":"涉及霸凌、偷窃、伤害自身等不良行为或孩子出现成绩大幅下滑、情绪偏激等情况，家长必须干预。","headline":"安全底线不可退让","explanation":["筛选朋友的关键是品行三观，而非家庭背景","日常社交中，孩子遇到小挫折是成长机会，不必过多干预","原则性问题如安全、法律、身心健康则不容妥协"],"misconception":"把职业、收入、户籍等标签等同于家庭教育水平","talkLine":"看孩子交了什么样的朋友，主要还是看品行干不干净，而不是家里条件好不好。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2070952313695555812"}]},{"id":"door-4","label":"奇闻","icon":"🔄","clue":"保洁员朋友给家长的启发","question":"有知乎答主指出，在警惕保洁员家长之前，应该先警惕什么？","options":["孩子的老师","那些主动提醒的“好心人”","学校的管理制度"],"answer":1,"answerNote":"有答主认为，这些好心人可能存在职业歧视、与保洁员有矛盾或孩子间存在矛盾，需要仔细分辨其动机。","headline":"先甄别“好心提醒”的动机","explanation":["某些善意提醒可能出于职业歧视或社交孤立目的","个别家长可能被孩子误导，无意中成为社交孤立帮凶","应警惕小圈子偏见而非孩子朋友的家庭背景"],"misconception":"把所有旁人的提醒都当作客观风险提示","talkLine":"下次有人跟你说这种话，不妨多问两句：他家孩子跟人家孩子有没有闹过矛盾？","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2070952313695555812"}]}]}},{"id":"hot-3-015f8a41","updatedAt":"2026-08-17T03:30:51.348Z","mode":"zhihu-cli-hot-fallback","topic":{"rank":"知乎最新热榜 #3","shortTitle":"摩根大通警告明年或爆发全球粮食危机，食品通胀率将从2.8%升至5%，粮价会大涨吗？会对国内有影响吗？","title":"摩根大通警告明年或爆发全球粮食危机，食品通胀率将从2.8%升至5%，粮价会大涨吗？会对国内有影响吗？","summary":"战争、天气、仓储、水资源、浪费——五重压力正在同步收紧全球粮食供应的\"阀门\"。 8月15日，摩根大通最新研究报告显示，下一场全球粮食危机的轮廓已初步成形，食品通胀压力将持续至2027年上半年。 该行驻伦敦高级全球经济学家Nora Szentivanyi领衔撰写了这份题为《粮食安全即国家安全：一场复合风暴》的报告。报告警告称，霍尔木兹海峡的持续中断与一场可能创历史纪录的超级厄尔尼诺正在同步发酵，将削弱农作物产量、压缩农业生…","facts":["来自知乎最新热榜","内容随热点持续发展","已保留原文核对入口"],"sourceUrl":"https://www.zhihu.com/question/2072359611483382539","thumbnailUrl":"https://pic3.zhimg.com/v2-410546722c831c731c9e6a69edfc73be.jpg","talkOpener":"你看到知乎热榜上的“摩根大通警告明年或爆发全球粮食危机，食品通胀率将从2.8%升至5”了吗？","visualTokens":["热","知","3"],"bubble":"热榜之外，还有门道。","boxes":[{"id":"door-1","label":"事件背景","icon":"🧭","clue":"事件背景","question":"理解这条实时热点，第一步最应该做什么？","options":["阅读热榜原文","只看标题","只看转发量"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"事件背景","explanation":["战争、天气、仓储、水资源、浪费——五重压力正在同步收紧全球粮食供应的\"阀门\"。 8月15日，摩根大通最新研究报告显示，下一场全球粮食危机的轮廓已初步成形，食品通胀压力将持续至2027年上半年。 该行驻伦敦高级全球经济学家Nora Szentivanyi领衔撰写了这份题为《粮食安全即国家安全：一场复合风暴》的报告。报告警告称，霍尔木兹海峡的持续中断与一场可能创历史纪录的超级厄尔尼诺正在同步发酵，将削","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的事件背景。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072359611483382539"}]},{"id":"door-2","label":"关键原理","icon":"🧩","clue":"关键原理","question":"面对仍在发展的热点，哪种判断方式更可靠？","options":["比较原文与不同观点","只看最热评论","凭印象下结论"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"关键原理","explanation":["战争、天气、仓储、水资源、浪费——五重压力正在同步收紧全球粮食供应的\"阀门\"。 8月15日，摩根大通最新研究报告显示，下一场全球粮食危机的轮廓已初步成形，食品通胀压力将持续至2027年上半年。 该行驻伦敦高级全球经济学家Nora Szentivanyi领衔撰写了这份题为《粮食安全即国家安全：一场复合风暴》的报告。报告警告称，霍尔木兹海峡的持续中断与一场可能创历史纪录的超级厄尔尼诺正在同步发酵，将削","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的关键原理。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072359611483382539"}]},{"id":"door-3","label":"数字尺度","icon":"📏","clue":"数字尺度","question":"看到热点中的醒目数字时，首先要确认什么？","options":["统计口径和时间范围","数字是否够大","谁先转发"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"数字尺度","explanation":["战争、天气、仓储、水资源、浪费——五重压力正在同步收紧全球粮食供应的\"阀门\"。 8月15日，摩根大通最新研究报告显示，下一场全球粮食危机的轮廓已初步成形，食品通胀压力将持续至2027年上半年。 该行驻伦敦高级全球经济学家Nora Szentivanyi领衔撰写了这份题为《粮食安全即国家安全：一场复合风暴》的报告。报告警告称，霍尔木兹海峡的持续中断与一场可能创历史纪录的超级厄尔尼诺正在同步发酵，将削","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的数字尺度。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072359611483382539"}]},{"id":"door-4","label":"反常识","icon":"💡","clue":"反常识","question":"热榜排名最能说明什么？","options":["当前关注度","事实已经定论","多数人意见一致"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"反常识","explanation":["战争、天气、仓储、水资源、浪费——五重压力正在同步收紧全球粮食供应的\"阀门\"。 8月15日，摩根大通最新研究报告显示，下一场全球粮食危机的轮廓已初步成形，食品通胀压力将持续至2027年上半年。 该行驻伦敦高级全球经济学家Nora Szentivanyi领衔撰写了这份题为《粮食安全即国家安全：一场复合风暴》的报告。报告警告称，霍尔木兹海峡的持续中断与一场可能创历史纪录的超级厄尔尼诺正在同步发酵，将削","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的反常识。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072359611483382539"}]}]}},{"id":"hot-4-1d2819d2","updatedAt":"2026-08-17T03:30:51.349Z","mode":"zhihu-cli-hot-fallback","topic":{"rank":"知乎最新热榜 #4","shortTitle":"东莞 17 亿元全额付款土地被无偿收回，官方公告称已解除出让合同，怎样从法律角度解读？","title":"东莞 17 亿元全额付款土地被无偿收回，官方公告称已解除出让合同，怎样从法律角度解读？","summary":"去年，“东莞17亿元全额付款土地被无偿收回，企业称‘闻所未闻’”一事引发广泛热议。近日，该事件终于迎来最新进展。 8月11日，广东东莞市自然资源局发布《解除国有建设用地使用权出让合同公告》称，坐落于东莞市滨海湾新区交椅湾的2宗土地，因闲置被收回国有建设用地使用权，该局正式与宗地受让人——紫光集团两家关联公司解除出让合同。 [图片] 时间拨回到2017年。这一年，紫光集团有限公司与东莞市人民政府在东莞签订战略合作框架…","facts":["来自知乎最新热榜","内容随热点持续发展","已保留原文核对入口"],"sourceUrl":"https://www.zhihu.com/question/2072365745934005252","thumbnailUrl":"https://pic4.zhimg.com/v2-0f711a87e0d57ffed354404a4d8fd803.jpg","talkOpener":"你看到知乎热榜上的“东莞 17 亿元全额付款土地被无偿收回，官方公告称已解除出让合同”了吗？","visualTokens":["热","知","4"],"bubble":"热榜之外，还有门道。","boxes":[{"id":"door-1","label":"事件背景","icon":"🧭","clue":"事件背景","question":"理解这条实时热点，第一步最应该做什么？","options":["阅读热榜原文","只看标题","只看转发量"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"事件背景","explanation":["去年，“东莞17亿元全额付款土地被无偿收回，企业称‘闻所未闻’”一事引发广泛热议。近日，该事件终于迎来最新进展。 8月11日，广东东莞市自然资源局发布《解除国有建设用地使用权出让合同公告》称，坐落于东莞市滨海湾新区交椅湾的2宗土地，因闲置被收回国有建设用地使用权，该局正式与宗地受让人——紫光集团两家关联公司解除出让合同。 [图片] 时间拨回到2017年。这一年，紫光集团有限公司与东莞市人民政府在东","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的事件背景。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072365745934005252"}]},{"id":"door-2","label":"关键原理","icon":"🧩","clue":"关键原理","question":"面对仍在发展的热点，哪种判断方式更可靠？","options":["比较原文与不同观点","只看最热评论","凭印象下结论"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"关键原理","explanation":["去年，“东莞17亿元全额付款土地被无偿收回，企业称‘闻所未闻’”一事引发广泛热议。近日，该事件终于迎来最新进展。 8月11日，广东东莞市自然资源局发布《解除国有建设用地使用权出让合同公告》称，坐落于东莞市滨海湾新区交椅湾的2宗土地，因闲置被收回国有建设用地使用权，该局正式与宗地受让人——紫光集团两家关联公司解除出让合同。 [图片] 时间拨回到2017年。这一年，紫光集团有限公司与东莞市人民政府在东","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的关键原理。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072365745934005252"}]},{"id":"door-3","label":"数字尺度","icon":"📏","clue":"数字尺度","question":"看到热点中的醒目数字时，首先要确认什么？","options":["统计口径和时间范围","数字是否够大","谁先转发"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"数字尺度","explanation":["去年，“东莞17亿元全额付款土地被无偿收回，企业称‘闻所未闻’”一事引发广泛热议。近日，该事件终于迎来最新进展。 8月11日，广东东莞市自然资源局发布《解除国有建设用地使用权出让合同公告》称，坐落于东莞市滨海湾新区交椅湾的2宗土地，因闲置被收回国有建设用地使用权，该局正式与宗地受让人——紫光集团两家关联公司解除出让合同。 [图片] 时间拨回到2017年。这一年，紫光集团有限公司与东莞市人民政府在东","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的数字尺度。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072365745934005252"}]},{"id":"door-4","label":"反常识","icon":"💡","clue":"反常识","question":"热榜排名最能说明什么？","options":["当前关注度","事实已经定论","多数人意见一致"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"反常识","explanation":["去年，“东莞17亿元全额付款土地被无偿收回，企业称‘闻所未闻’”一事引发广泛热议。近日，该事件终于迎来最新进展。 8月11日，广东东莞市自然资源局发布《解除国有建设用地使用权出让合同公告》称，坐落于东莞市滨海湾新区交椅湾的2宗土地，因闲置被收回国有建设用地使用权，该局正式与宗地受让人——紫光集团两家关联公司解除出让合同。 [图片] 时间拨回到2017年。这一年，紫光集团有限公司与东莞市人民政府在东","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的反常识。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072365745934005252"}]}]}},{"id":"hot-5-39ec9c8f","updatedAt":"2026-08-17T03:30:51.349Z","mode":"zhihu-cli-hot-fallback","topic":{"rank":"知乎最新热榜 #5","shortTitle":"为什么说“围棋已死”而没有“象棋已死”的说法？","title":"为什么说“围棋已死”而没有“象棋已死”的说法？","summary":"看到柯洁表示大家放弃了自己的棋风，转而去背AI棋谱，认为围棋已死。但是为什么没有人提出背象棋AI棋谱，说“象棋已死”呢？","facts":["来自知乎最新热榜","内容随热点持续发展","已保留原文核对入口"],"sourceUrl":"https://www.zhihu.com/question/624290604","thumbnailUrl":"https://pic1.zhimg.com/v2-63457096ed83e8a690c0b012933d25c4.jpg","talkOpener":"你看到知乎热榜上的“为什么说“围棋已死”而没有“象棋已死”的说法？”了吗？","visualTokens":["热","知","5"],"bubble":"热榜之外，还有门道。","boxes":[{"id":"door-1","label":"事件背景","icon":"🧭","clue":"事件背景","question":"理解这条实时热点，第一步最应该做什么？","options":["阅读热榜原文","只看标题","只看转发量"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"事件背景","explanation":["看到柯洁表示大家放弃了自己的棋风，转而去背AI棋谱，认为围棋已死。但是为什么没有人提出背象棋AI棋谱，说“象棋已死”呢？","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的事件背景。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/624290604"}]},{"id":"door-2","label":"关键原理","icon":"🧩","clue":"关键原理","question":"面对仍在发展的热点，哪种判断方式更可靠？","options":["比较原文与不同观点","只看最热评论","凭印象下结论"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"关键原理","explanation":["看到柯洁表示大家放弃了自己的棋风，转而去背AI棋谱，认为围棋已死。但是为什么没有人提出背象棋AI棋谱，说“象棋已死”呢？","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的关键原理。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/624290604"}]},{"id":"door-3","label":"数字尺度","icon":"📏","clue":"数字尺度","question":"看到热点中的醒目数字时，首先要确认什么？","options":["统计口径和时间范围","数字是否够大","谁先转发"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"数字尺度","explanation":["看到柯洁表示大家放弃了自己的棋风，转而去背AI棋谱，认为围棋已死。但是为什么没有人提出背象棋AI棋谱，说“象棋已死”呢？","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的数字尺度。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/624290604"}]},{"id":"door-4","label":"反常识","icon":"💡","clue":"反常识","question":"热榜排名最能说明什么？","options":["当前关注度","事实已经定论","多数人意见一致"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"反常识","explanation":["看到柯洁表示大家放弃了自己的棋风，转而去背AI棋谱，认为围棋已死。但是为什么没有人提出背象棋AI棋谱，说“象棋已死”呢？","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的反常识。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/624290604"}]}]}},{"id":"hot-6-ad19421f","updatedAt":"2026-08-17T03:30:51.349Z","mode":"zhihu-cli-hot-fallback","topic":{"rank":"知乎最新热榜 #6","shortTitle":"2026 WTT瑞典大满贯，菲利克斯·勒布伦 4-1 击败张本智和，获得男单冠军，如何评价这场比赛？","title":"2026 WTT瑞典大满贯，菲利克斯·勒布伦 4-1 击败张本智和，获得男单冠军，如何评价这场比赛？","summary":"热点仍在发展，打开原文查看最新讨论。","facts":["来自知乎最新热榜","内容随热点持续发展","已保留原文核对入口"],"sourceUrl":"https://www.zhihu.com/question/2072504249347577067","thumbnailUrl":"https://pic2.zhimg.com/v2-90ae8762975756e5df8402be648e06bd.jpg","talkOpener":"你看到知乎热榜上的“2026 WTT瑞典大满贯，菲利克斯·勒布伦 4-1 击败张本智”了吗？","visualTokens":["热","知","6"],"bubble":"热榜之外，还有门道。","boxes":[{"id":"door-1","label":"事件背景","icon":"🧭","clue":"事件背景","question":"理解这条实时热点，第一步最应该做什么？","options":["阅读热榜原文","只看标题","只看转发量"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"事件背景","explanation":["这条热点的背景仍需结合原文理解。","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的事件背景。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072504249347577067"}]},{"id":"door-2","label":"关键原理","icon":"🧩","clue":"关键原理","question":"面对仍在发展的热点，哪种判断方式更可靠？","options":["比较原文与不同观点","只看最热评论","凭印象下结论"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"关键原理","explanation":["这条热点的背景仍需结合原文理解。","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的关键原理。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072504249347577067"}]},{"id":"door-3","label":"数字尺度","icon":"📏","clue":"数字尺度","question":"看到热点中的醒目数字时，首先要确认什么？","options":["统计口径和时间范围","数字是否够大","谁先转发"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"数字尺度","explanation":["这条热点的背景仍需结合原文理解。","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的数字尺度。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072504249347577067"}]},{"id":"door-4","label":"反常识","icon":"💡","clue":"反常识","question":"热榜排名最能说明什么？","options":["当前关注度","事实已经定论","多数人意见一致"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"反常识","explanation":["这条热点的背景仍需结合原文理解。","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的反常识。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072504249347577067"}]}]}},{"id":"hot-7-f0f6df7d","updatedAt":"2026-08-17T03:30:51.349Z","mode":"zhihu-cli-hot-fallback","topic":{"rank":"知乎最新热榜 #7","shortTitle":"网文作者文黛黛假死 3 年承认骗局，读者斥责其消费感情，从法律上看，这种行为是否构成欺诈？","title":"网文作者文黛黛假死 3 年承认骗局，读者斥责其消费感情，从法律上看，这种行为是否构成欺诈？","summary":"2026年8月12日，番茄小说作者文黛黛在“去世”三年后突然发文，承认2023年的“心脏病离世”系假死，并向读者道歉。据公开报道，她此次“复活”与平台提现新规要求作者人脸识别有关，截至8月14日，番茄小说已对其相关作品和账号作出处置。这场持续3年的“遗作”闹剧，在读者愤怒与平台介入中迎来阶段性结局。 文黛黛是番茄小说平台的一名签约作者，2023年8月，其连载小说《春日藏欢喜》更新至第64章时，一个自称其男友的账号发布…","facts":["来自知乎最新热榜","内容随热点持续发展","已保留原文核对入口"],"sourceUrl":"https://www.zhihu.com/question/2071974633394238237","thumbnailUrl":"https://pic3.zhimg.com/v2-60624fee30884e4d73d0fbd73cb64f36.jpg","talkOpener":"你看到知乎热榜上的“网文作者文黛黛假死 3 年承认骗局，读者斥责其消费感情，从法律上”了吗？","visualTokens":["热","知","7"],"bubble":"热榜之外，还有门道。","boxes":[{"id":"door-1","label":"事件背景","icon":"🧭","clue":"事件背景","question":"理解这条实时热点，第一步最应该做什么？","options":["阅读热榜原文","只看标题","只看转发量"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"事件背景","explanation":["2026年8月12日，番茄小说作者文黛黛在“去世”三年后突然发文，承认2023年的“心脏病离世”系假死，并向读者道歉。据公开报道，她此次“复活”与平台提现新规要求作者人脸识别有关，截至8月14日，番茄小说已对其相关作品和账号作出处置。这场持续3年的“遗作”闹剧，在读者愤怒与平台介入中迎来阶段性结局。 文黛黛是番茄小说平台的一名签约作者，2023年8月，其连载小说《春日藏欢喜》更新至第64章时，一个","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的事件背景。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2071974633394238237"}]},{"id":"door-2","label":"关键原理","icon":"🧩","clue":"关键原理","question":"面对仍在发展的热点，哪种判断方式更可靠？","options":["比较原文与不同观点","只看最热评论","凭印象下结论"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"关键原理","explanation":["2026年8月12日，番茄小说作者文黛黛在“去世”三年后突然发文，承认2023年的“心脏病离世”系假死，并向读者道歉。据公开报道，她此次“复活”与平台提现新规要求作者人脸识别有关，截至8月14日，番茄小说已对其相关作品和账号作出处置。这场持续3年的“遗作”闹剧，在读者愤怒与平台介入中迎来阶段性结局。 文黛黛是番茄小说平台的一名签约作者，2023年8月，其连载小说《春日藏欢喜》更新至第64章时，一个","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的关键原理。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2071974633394238237"}]},{"id":"door-3","label":"数字尺度","icon":"📏","clue":"数字尺度","question":"看到热点中的醒目数字时，首先要确认什么？","options":["统计口径和时间范围","数字是否够大","谁先转发"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"数字尺度","explanation":["2026年8月12日，番茄小说作者文黛黛在“去世”三年后突然发文，承认2023年的“心脏病离世”系假死，并向读者道歉。据公开报道，她此次“复活”与平台提现新规要求作者人脸识别有关，截至8月14日，番茄小说已对其相关作品和账号作出处置。这场持续3年的“遗作”闹剧，在读者愤怒与平台介入中迎来阶段性结局。 文黛黛是番茄小说平台的一名签约作者，2023年8月，其连载小说《春日藏欢喜》更新至第64章时，一个","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的数字尺度。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2071974633394238237"}]},{"id":"door-4","label":"反常识","icon":"💡","clue":"反常识","question":"热榜排名最能说明什么？","options":["当前关注度","事实已经定论","多数人意见一致"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"反常识","explanation":["2026年8月12日，番茄小说作者文黛黛在“去世”三年后突然发文，承认2023年的“心脏病离世”系假死，并向读者道歉。据公开报道，她此次“复活”与平台提现新规要求作者人脸识别有关，截至8月14日，番茄小说已对其相关作品和账号作出处置。这场持续3年的“遗作”闹剧，在读者愤怒与平台介入中迎来阶段性结局。 文黛黛是番茄小说平台的一名签约作者，2023年8月，其连载小说《春日藏欢喜》更新至第64章时，一个","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的反常识。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2071974633394238237"}]}]}},{"id":"hot-8-d6667a63","updatedAt":"2026-08-17T03:30:51.349Z","mode":"zhihu-cli-hot-fallback","topic":{"rank":"知乎最新热榜 #8","shortTitle":"官方通报传销头目出狱办书院，涉事书院被关停、3人被刑拘，还有其他违法犯罪线索被发现，哪些信息值得关注？","title":"官方通报传销头目出狱办书院，涉事书院被关停、3人被刑拘，还有其他违法犯罪线索被发现，哪些信息值得关注？","summary":"8月5日，有媒体报道浙江新昌县“如是书院”相关问题。当日当地成立联合调查组，开展线索核查、调查取证、溯源摸排等工作。调查组经调查后发布如下通报： 赖某明（化名如平），1968年3月出生，户籍地浙江省绍兴市新昌县羽林街道，2002年因犯非法经营罪被广西壮族自治区北海市海城区人民法院判处有期徒刑2年，并处罚金50万元。 经查，“如是书院”未依法办理相关登记备案手续，经营场所由赖某明于2016年向新昌县七盘合一农业发展有…","facts":["来自知乎最新热榜","内容随热点持续发展","已保留原文核对入口"],"sourceUrl":"https://www.zhihu.com/question/2072417954453354372","thumbnailUrl":"https://pic1.zhimg.com/v2-ef19221c60b699ad0b81c547c49480f0.png","talkOpener":"你看到知乎热榜上的“官方通报传销头目出狱办书院，涉事书院被关停、3人被刑拘，还有其他”了吗？","visualTokens":["热","知","8"],"bubble":"热榜之外，还有门道。","boxes":[{"id":"door-1","label":"事件背景","icon":"🧭","clue":"事件背景","question":"理解这条实时热点，第一步最应该做什么？","options":["阅读热榜原文","只看标题","只看转发量"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"事件背景","explanation":["8月5日，有媒体报道浙江新昌县“如是书院”相关问题。当日当地成立联合调查组，开展线索核查、调查取证、溯源摸排等工作。调查组经调查后发布如下通报： 赖某明（化名如平），1968年3月出生，户籍地浙江省绍兴市新昌县羽林街道，2002年因犯非法经营罪被广西壮族自治区北海市海城区人民法院判处有期徒刑2年，并处罚金50万元。 经查，“如是书院”未依法办理相关登记备案手续，经营场所由赖某明于2016年向新昌县","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的事件背景。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072417954453354372"}]},{"id":"door-2","label":"关键原理","icon":"🧩","clue":"关键原理","question":"面对仍在发展的热点，哪种判断方式更可靠？","options":["比较原文与不同观点","只看最热评论","凭印象下结论"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"关键原理","explanation":["8月5日，有媒体报道浙江新昌县“如是书院”相关问题。当日当地成立联合调查组，开展线索核查、调查取证、溯源摸排等工作。调查组经调查后发布如下通报： 赖某明（化名如平），1968年3月出生，户籍地浙江省绍兴市新昌县羽林街道，2002年因犯非法经营罪被广西壮族自治区北海市海城区人民法院判处有期徒刑2年，并处罚金50万元。 经查，“如是书院”未依法办理相关登记备案手续，经营场所由赖某明于2016年向新昌县","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的关键原理。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072417954453354372"}]},{"id":"door-3","label":"数字尺度","icon":"📏","clue":"数字尺度","question":"看到热点中的醒目数字时，首先要确认什么？","options":["统计口径和时间范围","数字是否够大","谁先转发"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"数字尺度","explanation":["8月5日，有媒体报道浙江新昌县“如是书院”相关问题。当日当地成立联合调查组，开展线索核查、调查取证、溯源摸排等工作。调查组经调查后发布如下通报： 赖某明（化名如平），1968年3月出生，户籍地浙江省绍兴市新昌县羽林街道，2002年因犯非法经营罪被广西壮族自治区北海市海城区人民法院判处有期徒刑2年，并处罚金50万元。 经查，“如是书院”未依法办理相关登记备案手续，经营场所由赖某明于2016年向新昌县","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的数字尺度。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072417954453354372"}]},{"id":"door-4","label":"反常识","icon":"💡","clue":"反常识","question":"热榜排名最能说明什么？","options":["当前关注度","事实已经定论","多数人意见一致"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"反常识","explanation":["8月5日，有媒体报道浙江新昌县“如是书院”相关问题。当日当地成立联合调查组，开展线索核查、调查取证、溯源摸排等工作。调查组经调查后发布如下通报： 赖某明（化名如平），1968年3月出生，户籍地浙江省绍兴市新昌县羽林街道，2002年因犯非法经营罪被广西壮族自治区北海市海城区人民法院判处有期徒刑2年，并处罚金50万元。 经查，“如是书院”未依法办理相关登记备案手续，经营场所由赖某明于2016年向新昌县","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的反常识。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072417954453354372"}]}]}},{"id":"hot-9-dd6c275b","updatedAt":"2026-08-17T03:30:51.350Z","mode":"zhihu-cli-hot-fallback","topic":{"rank":"知乎最新热榜 #9","shortTitle":"枪杀联合健康保险 CEO 的路易吉正式认罪，12 月将迎来量刑，或面临终身监禁，哪些信息值得关注？","title":"枪杀联合健康保险 CEO 的路易吉正式认罪，12 月将迎来量刑，或面临终身监禁，哪些信息值得关注？","summary":"当地时间8月14日，路易吉·曼吉奥内就枪杀联合健康保险首席执行官布赖恩·汤普森（Brian Thompson）一案正式认罪。联邦法官将路易吉·曼吉奥内的量刑日期定于12月18日。 [图片] 路易吉·曼吉奥内当天在法庭上表示，他就其联邦刑事案件认罪，承认自己枪杀了汤普森。这一认罪协议将避免这起备受瞩目的案件进入联邦审判阶段。此外，认罪还可能使曼吉奥内得以寻求撤销纽约州的谋杀指控，并推迟即将到来的州审判。 曼吉奥内目前面临联邦指控…","facts":["来自知乎最新热榜","内容随热点持续发展","已保留原文核对入口"],"sourceUrl":"https://www.zhihu.com/question/2071884777888682058","thumbnailUrl":"https://pic3.zhimg.com/v2-3d3308719dd148aa22701d123907e7be.jpg","talkOpener":"你看到知乎热榜上的“枪杀联合健康保险 CEO 的路易吉正式认罪，12 月将迎来量刑，”了吗？","visualTokens":["热","知","9"],"bubble":"热榜之外，还有门道。","boxes":[{"id":"door-1","label":"事件背景","icon":"🧭","clue":"事件背景","question":"理解这条实时热点，第一步最应该做什么？","options":["阅读热榜原文","只看标题","只看转发量"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"事件背景","explanation":["当地时间8月14日，路易吉·曼吉奥内就枪杀联合健康保险首席执行官布赖恩·汤普森（Brian Thompson）一案正式认罪。联邦法官将路易吉·曼吉奥内的量刑日期定于12月18日。 [图片] 路易吉·曼吉奥内当天在法庭上表示，他就其联邦刑事案件认罪，承认自己枪杀了汤普森。这一认罪协议将避免这起备受瞩目的案件进入联邦审判阶段。此外，认罪还可能使曼吉奥内得以寻求撤销纽约州的谋杀指控，并推迟即将到来的州审","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的事件背景。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2071884777888682058"}]},{"id":"door-2","label":"关键原理","icon":"🧩","clue":"关键原理","question":"面对仍在发展的热点，哪种判断方式更可靠？","options":["比较原文与不同观点","只看最热评论","凭印象下结论"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"关键原理","explanation":["当地时间8月14日，路易吉·曼吉奥内就枪杀联合健康保险首席执行官布赖恩·汤普森（Brian Thompson）一案正式认罪。联邦法官将路易吉·曼吉奥内的量刑日期定于12月18日。 [图片] 路易吉·曼吉奥内当天在法庭上表示，他就其联邦刑事案件认罪，承认自己枪杀了汤普森。这一认罪协议将避免这起备受瞩目的案件进入联邦审判阶段。此外，认罪还可能使曼吉奥内得以寻求撤销纽约州的谋杀指控，并推迟即将到来的州审","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的关键原理。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2071884777888682058"}]},{"id":"door-3","label":"数字尺度","icon":"📏","clue":"数字尺度","question":"看到热点中的醒目数字时，首先要确认什么？","options":["统计口径和时间范围","数字是否够大","谁先转发"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"数字尺度","explanation":["当地时间8月14日，路易吉·曼吉奥内就枪杀联合健康保险首席执行官布赖恩·汤普森（Brian Thompson）一案正式认罪。联邦法官将路易吉·曼吉奥内的量刑日期定于12月18日。 [图片] 路易吉·曼吉奥内当天在法庭上表示，他就其联邦刑事案件认罪，承认自己枪杀了汤普森。这一认罪协议将避免这起备受瞩目的案件进入联邦审判阶段。此外，认罪还可能使曼吉奥内得以寻求撤销纽约州的谋杀指控，并推迟即将到来的州审","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的数字尺度。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2071884777888682058"}]},{"id":"door-4","label":"反常识","icon":"💡","clue":"反常识","question":"热榜排名最能说明什么？","options":["当前关注度","事实已经定论","多数人意见一致"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"反常识","explanation":["当地时间8月14日，路易吉·曼吉奥内就枪杀联合健康保险首席执行官布赖恩·汤普森（Brian Thompson）一案正式认罪。联邦法官将路易吉·曼吉奥内的量刑日期定于12月18日。 [图片] 路易吉·曼吉奥内当天在法庭上表示，他就其联邦刑事案件认罪，承认自己枪杀了汤普森。这一认罪协议将避免这起备受瞩目的案件进入联邦审判阶段。此外，认罪还可能使曼吉奥内得以寻求撤销纽约州的谋杀指控，并推迟即将到来的州审","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的反常识。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2071884777888682058"}]}]}},{"id":"hot-10-cb01d9f0","updatedAt":"2026-08-17T03:30:51.352Z","mode":"zhihu-cli-hot-fallback","topic":{"rank":"知乎最新热榜 #10","shortTitle":"继小米YU7完成品类启蒙后，岚图追光S、智界RX接连入局，FUV这个市场到底有没有想象空间？","title":"继小米YU7完成品类启蒙后，岚图追光S、智界RX接连入局，FUV这个市场到底有没有想象空间？","summary":"2026年被称为“中国FUV元年”。继小米YU7完成品类启蒙后，岚图追光S、智界RX等产品接连入局。 [图片] FUV概念最早由法拉利在2022年提出，本意是“法拉利多功能车”。把一台低趴宽体的“大两厢”重新定义为FUV，到底是开辟新品类，还是SUV红利见顶后造出的“营销新词”？ 会不会重蹈当年“旅行车”叫好不叫座的覆辙？","facts":["来自知乎最新热榜","内容随热点持续发展","已保留原文核对入口"],"sourceUrl":"https://www.zhihu.com/question/2072291192566452332","thumbnailUrl":"https://pic2.zhimg.com/v2-3f10043cbe6d0e731db459b851b9702d.jpg","talkOpener":"你看到知乎热榜上的“继小米YU7完成品类启蒙后，岚图追光S、智界RX接连入局，FUV”了吗？","visualTokens":["热","知","10"],"bubble":"热榜之外，还有门道。","boxes":[{"id":"door-1","label":"事件背景","icon":"🧭","clue":"事件背景","question":"理解这条实时热点，第一步最应该做什么？","options":["阅读热榜原文","只看标题","只看转发量"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"事件背景","explanation":["2026年被称为“中国FUV元年”。继小米YU7完成品类启蒙后，岚图追光S、智界RX等产品接连入局。 [图片] FUV概念最早由法拉利在2022年提出，本意是“法拉利多功能车”。把一台低趴宽体的“大两厢”重新定义为FUV，到底是开辟新品类，还是SUV红利见顶后造出的“营销新词”？ 会不会重蹈当年“旅行车”叫好不叫座的覆辙？","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的事件背景。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072291192566452332"}]},{"id":"door-2","label":"关键原理","icon":"🧩","clue":"关键原理","question":"面对仍在发展的热点，哪种判断方式更可靠？","options":["比较原文与不同观点","只看最热评论","凭印象下结论"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"关键原理","explanation":["2026年被称为“中国FUV元年”。继小米YU7完成品类启蒙后，岚图追光S、智界RX等产品接连入局。 [图片] FUV概念最早由法拉利在2022年提出，本意是“法拉利多功能车”。把一台低趴宽体的“大两厢”重新定义为FUV，到底是开辟新品类，还是SUV红利见顶后造出的“营销新词”？ 会不会重蹈当年“旅行车”叫好不叫座的覆辙？","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的关键原理。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072291192566452332"}]},{"id":"door-3","label":"数字尺度","icon":"📏","clue":"数字尺度","question":"看到热点中的醒目数字时，首先要确认什么？","options":["统计口径和时间范围","数字是否够大","谁先转发"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"数字尺度","explanation":["2026年被称为“中国FUV元年”。继小米YU7完成品类启蒙后，岚图追光S、智界RX等产品接连入局。 [图片] FUV概念最早由法拉利在2022年提出，本意是“法拉利多功能车”。把一台低趴宽体的“大两厢”重新定义为FUV，到底是开辟新品类，还是SUV红利见顶后造出的“营销新词”？ 会不会重蹈当年“旅行车”叫好不叫座的覆辙？","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的数字尺度。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072291192566452332"}]},{"id":"door-4","label":"反常识","icon":"💡","clue":"反常识","question":"热榜排名最能说明什么？","options":["当前关注度","事实已经定论","多数人意见一致"],"answer":0,"answerNote":"实时热点仍在发展，回到原文并核对口径更可靠。","headline":"反常识","explanation":["2026年被称为“中国FUV元年”。继小米YU7完成品类启蒙后，岚图追光S、智界RX等产品接连入局。 [图片] FUV概念最早由法拉利在2022年提出，本意是“法拉利多功能车”。把一台低趴宽体的“大两厢”重新定义为FUV，到底是开辟新品类，还是SUV红利见顶后造出的“营销新词”？ 会不会重蹈当年“旅行车”叫好不叫座的覆辙？","热度代表关注度，不自动等于事实已经定论。","页面保留了知乎热榜原文入口，便于继续核对。"],"misconception":"把热度、观点和事实结论混为一谈。","talkLine":"这条热点真正值得聊的，不只是标题，还有它的反常识。","sources":[{"title":"知乎热榜原文","url":"https://www.zhihu.com/question/2072291192566452332"}]}]}}]}};
 
 async function loadJson(url) {
   const data = embeddedData[url];
@@ -1553,15 +1650,13 @@ function renderTopic() {
   els.topicTitle.textContent = topic.title;
   els.topicSummary.textContent = topic.summary;
   els.topicSource.href = topic.sourceUrl;
-  els.dataStatus.textContent = mode === "live-cli" ? "Zhihu CLI 实时数据" : "已审核缓存";
+  els.dataStatus.textContent = mode?.startsWith("zhihu-cli")
+    ? "知乎 CLI 最新快照"
+    : "已审核缓存";
   els.factStrip.innerHTML = topic.facts
     .map((fact) => `<span class="fact-chip">${escapeHtml(fact)}</span>`)
     .join("");
 
-  const tokens = topic.visualTokens || ["知", "?", "山"];
-  els.orbitOne.textContent = tokens[0];
-  els.orbitTwo.textContent = tokens[1];
-  els.orbitThree.textContent = tokens[2];
   els.speechBubble.innerHTML = escapeHtml(topic.bubble || "热点背后，藏着四个门道。")
     .replaceAll("\n", "<br>");
 }
@@ -1577,7 +1672,7 @@ function switchTopic(id, updateUrl = true) {
   state.activeBox = null;
   els.talkSection.hidden = state.completed.size !== payload.topic.boxes.length;
 
-  els.topicButtons.forEach((button) => {
+  document.querySelectorAll("[data-topic-id]").forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.topicId === id));
   });
 
@@ -1591,6 +1686,19 @@ function switchTopic(id, updateUrl = true) {
   renderBoxes();
   updateProgress();
   if (state.completed.size === payload.topic.boxes.length) renderTalkCard();
+}
+
+function renderTopicSwitcher() {
+  els.topicSwitcher.innerHTML = state.payloads
+    .map(
+      (payload, index) => `
+        <button type="button" data-topic-id="${escapeHtml(payload.id)}" aria-pressed="false">
+          <small>知乎最新热榜 #${index + 1}</small>
+          ${escapeHtml(payload.topic.shortTitle)}
+        </button>
+      `
+    )
+    .join("");
 }
 
 function renderBoxes() {
@@ -1732,18 +1840,18 @@ function renderTalkCard() {
 }
 
 function renderHotList() {
-  const { items, updatedAt, source } = state.hotList;
-  const sourceLabel = source === "zhihu-cli" ? "CLI 热榜" : "CLI 缓存样例";
-  els.hotCacheTime.textContent = `${sourceLabel} · ${formatTime(updatedAt)}`;
+  const { items, updatedAt } = state.hotList;
+  els.hotCacheTime.textContent = `知乎 CLI 最新快照 · ${formatTime(updatedAt)}`;
   els.hotList.innerHTML = items
-    .slice(0, 6)
+    .slice(0, 10)
     .map(
-      (item, index) => `
-        <a class="hot-item" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">
-          <span>候选 ${String(index + 1).padStart(2, "0")}</span>
-          <h3>${escapeHtml(item.title)}</h3>
-          <p>${escapeHtml(item.summary || "等待刘看山发现知识暗门")}</p>
-        </a>
+      (payload, index) => `
+        <button class="hot-item" type="button" data-select-topic="${escapeHtml(payload.id)}">
+          <span>热榜 #${String(index + 1).padStart(2, "0")}</span>
+          <h3>${escapeHtml(payload.topic.title)}</h3>
+          <p>${escapeHtml(payload.topic.summary || "等待刘看山发现知识暗门")}</p>
+          <strong>进入拆盒页面 →</strong>
+        </button>
       `
     )
     .join("");
@@ -1783,8 +1891,9 @@ function resetExperience() {
 }
 
 function bindEvents() {
-  els.topicButtons.forEach((button) => {
-    button.addEventListener("click", () => switchTopic(button.dataset.topicId));
+  els.topicSwitcher.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-topic-id]");
+    if (button) switchTopic(button.dataset.topicId);
   });
 
   els.startButton.addEventListener("click", () => {
@@ -1794,6 +1903,13 @@ function bindEvents() {
   els.boxGrid.addEventListener("click", (event) => {
     const button = event.target.closest("[data-open-box]");
     if (button) openBox(button.dataset.openBox);
+  });
+
+  els.hotList.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-select-topic]");
+    if (!button) return;
+    switchTopic(button.dataset.selectTopic);
+    document.querySelector("#top").scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   els.copyButton.addEventListener("click", copyOpener);
@@ -1812,16 +1928,20 @@ async function init() {
   bindEvents();
 
   try {
-    const [typhoonPayload, loongsonPayload, hotList] = await Promise.all([
-      loadJson("data/hot-topic.json"),
-      loadJson("data/hot-topic-loongson.json"),
-      loadJson("data/hot-list.json")
-    ]);
-    state.payloads = [loongsonPayload, typhoonPayload];
-    state.hotList = hotList;
+    const hotPages = await loadJson("data/hot-pages.json");
+    state.payloads = hotPages.items;
+    state.hotList = {
+      items: hotPages.items,
+      updatedAt: hotPages.generatedAt,
+      source: hotPages.source
+    };
+    renderTopicSwitcher();
     renderHotList();
     const requestedCase = new URLSearchParams(window.location.search).get("case");
-    switchTopic(requestedCase || "loongson", false);
+    const initialId = hotPages.items.some((item) => item.id === requestedCase)
+      ? requestedCase
+      : hotPages.items[0]?.id;
+    switchTopic(initialId, false);
   } catch (error) {
     renderLoadError(error);
   }
