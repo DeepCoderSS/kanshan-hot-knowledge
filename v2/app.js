@@ -28,7 +28,7 @@ const storageKey = "kanshan-knowledge-progress-v1";
 const state = {
   generated: [],
   featured: [],
-  activeId: "loongson",
+  activeId: "",
   completed: {},
   activeBox: null
 };
@@ -70,8 +70,8 @@ function formatTime(value) {
 
 function activePayload() {
   return [...state.generated, ...state.featured].find((item) => item.id === state.activeId)
-    ?? state.featured[0]
-    ?? state.generated[0];
+    ?? state.generated[0]
+    ?? state.featured[0];
 }
 
 function completedForActive() {
@@ -108,7 +108,7 @@ function renderCaseTabs() {
   const generatedActive = state.generated.find((item) => item.id === state.activeId);
   const generatedTab = generatedActive ? `
     <button type="button" class="active liveCase" data-case-id="${escapeHtml(generatedActive.id)}">
-      <small>CLI 快照 · ${escapeHtml(generatedActive.topic.rank)}</small>
+      <small>当前热榜 · ${escapeHtml(generatedActive.topic.rank)}</small>
       <strong>${escapeHtml(generatedActive.topic.shortTitle)}</strong>
       <span>${completedForActive().length}/4 已打开</span>
     </button>
@@ -285,7 +285,8 @@ async function init() {
     }
 
     const requestedCase = new URLSearchParams(window.location.search).get("case");
-    if ([...state.generated, ...state.featured].some((item) => item.id === requestedCase)) state.activeId = requestedCase;
+    const requestedPayload = [...state.generated, ...state.featured].find((item) => item.id === requestedCase);
+    state.activeId = requestedPayload?.id ?? state.generated[0]?.id ?? state.featured[0]?.id ?? "";
     renderHotList();
     renderAll();
   } catch (error) {
