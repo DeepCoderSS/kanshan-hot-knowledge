@@ -88,7 +88,7 @@ function renderPassport() {
 }
 
 function renderHotList() {
-  els.hotList.innerHTML = state.generated.slice(0, 10).map((payload, index) => {
+  els.hotList.innerHTML = state.generated.slice(0, 9).map((payload, index) => {
     const topic = payload.topic;
     const thumbnail = topic.thumbnailUrl
       ? `<img src="${escapeHtml(topic.thumbnailUrl)}" alt="" loading="lazy" />`
