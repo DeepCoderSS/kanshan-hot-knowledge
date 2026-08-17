@@ -121,6 +121,44 @@ a {
   font-weight: 700;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.version-switcher {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.version-switcher a,
+.version-switcher span {
+  min-height: 28px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.version-switcher a {
+  color: var(--muted);
+}
+
+.version-switcher span {
+  color: white;
+  background: var(--blue);
+}
+
 .status-dot {
   width: 7px;
   height: 7px;
@@ -1231,6 +1269,15 @@ footer a {
     display: none;
   }
 
+  .header-actions {
+    gap: 6px;
+  }
+
+  .version-switcher a,
+  .version-switcher span {
+    padding: 0 8px;
+  }
+
   .hero {
     padding: 38px 22px 28px;
     border-radius: 28px;
@@ -1345,9 +1392,14 @@ footer a {
           <small>热点背后的知识盲盒</small>
         </span>
       </a>
-      <div class="live-status" aria-label="数据状态">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span id="data-status">知乎 CLI 最新快照</span>
+      <div class="header-actions">
+        <nav class="version-switcher" aria-label="选择展示版本">
+          <span aria-current="page">版本 1</span><a href="v2/">版本 2</a>
+        </nav>
+        <div class="live-status" aria-label="数据状态">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="data-status">知乎 CLI 最新快照</span>
+        </div>
       </div>
     </header>
 
