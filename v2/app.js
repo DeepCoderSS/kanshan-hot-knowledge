@@ -1,8 +1,10 @@
 const els = {
   startButton: document.querySelector("#start-button"),
+  snapshotButton: document.querySelector("#snapshot-button"),
   snapshotNotice: document.querySelector("#snapshot-notice"),
   snapshotTime: document.querySelector("#snapshot-time"),
   hotList: document.querySelector("#hot-list-rail"),
+  caseTabs: document.querySelector("#case-tabs"),
   topicRank: document.querySelector("#topic-rank"),
   topicTime: document.querySelector("#topic-time"),
   topicTitle: document.querySelector("#topic-title"),
@@ -26,7 +28,8 @@ const els = {
 const storageKey = "kanshan-knowledge-progress-v1";
 const state = {
   generated: [],
-  activeId: "",
+  featured: [],
+  activeId: "loongson",
   completed: {},
   activeBox: null
 };
@@ -67,7 +70,9 @@ function formatTime(value) {
 }
 
 function activePayload() {
-  return state.generated.find((item) => item.id === state.activeId) ?? state.generated[0];
+  return [...state.generated, ...state.featured].find((item) => item.id === state.activeId)
+    ?? state.featured[0]
+    ?? state.generated[0];
 }
 
 function completedForActive() {
@@ -98,6 +103,28 @@ function renderHotList() {
       </article>
     `;
   }).join("");
+}
+
+function renderCaseTabs() {
+  const generatedActive = state.generated.find((item) => item.id === state.activeId);
+  const generatedTab = generatedActive ? `
+    <button type="button" class="active liveCase" data-case-id="${escapeHtml(generatedActive.id)}">
+      <small>CLI 快照 · ${escapeHtml(generatedActive.topic.rank)}</small>
+      <strong>${escapeHtml(generatedActive.topic.shortTitle)}</strong>
+      <span>${completedForActive().length}/4 已打开</span>
+    </button>
+  ` : "";
+
+  els.caseTabs.innerHTML = `${generatedTab}${state.featured.map((payload) => {
+    const active = payload.id === state.activeId;
+    const completed = (state.completed[payload.id] ?? []).length;
+    const label = payload.id === "loongson" ? "科技 · 实时热榜 #4" : "公共生活 · 当日热榜";
+    return `
+      <button type="button" class="${active ? "active" : ""}" data-case-id="${escapeHtml(payload.id)}">
+        <small>${label}</small><strong>${escapeHtml(payload.topic.shortTitle)}</strong><span>${completed}/4 已打开</span>
+      </button>
+    `;
+  }).join("")}`;
 }
 
 function renderTopic() {
@@ -151,13 +178,14 @@ function renderProgress() {
 
 function renderAll() {
   renderPassport();
+  renderCaseTabs();
   renderTopic();
   renderBoxes();
   renderProgress();
 }
 
 function chooseTopic(id, scroll = false) {
-  const exists = state.generated.some((item) => item.id === id);
+  const exists = [...state.generated, ...state.featured].some((item) => item.id === id);
   if (!exists) return;
   state.activeId = id;
   closeModal();
@@ -217,9 +245,16 @@ function closeModal() {
 
 function bindEvents() {
   els.startButton.addEventListener("click", () => document.querySelector("#cases").scrollIntoView({ behavior: "smooth" }));
+  els.snapshotButton.addEventListener("click", () => {
+    els.snapshotNotice.hidden = !els.snapshotNotice.hidden;
+  });
   els.hotList.addEventListener("click", (event) => {
     const button = event.target.closest("[data-topic-id]");
     if (button) chooseTopic(button.dataset.topicId, true);
+  });
+  els.caseTabs.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-case-id]");
+    if (button) chooseTopic(button.dataset.caseId, false);
   });
   els.boxGrid.addEventListener("click", (event) => {
     const button = event.target.closest("[data-box-id]");
@@ -239,8 +274,13 @@ function bindEvents() {
 async function init() {
   bindEvents();
   try {
-    const collection = await fetch("data/hot-pages.json").then((response) => response.json());
+    const [collection, loongson, typhoon] = await Promise.all([
+      fetch("data/hot-pages.json").then((response) => response.json()),
+      fetch("data/hot-topic-loongson.json").then((response) => response.json()),
+      fetch("data/hot-topic.json").then((response) => response.json())
+    ]);
     state.generated = collection.items;
+    state.featured = [loongson, typhoon];
     els.snapshotTime.textContent = `${formatTime(collection.generatedAt)} 更新 · 最近快照`;
 
     const stored = window.localStorage.getItem(storageKey);
@@ -249,9 +289,7 @@ async function init() {
     }
 
     const requestedCase = new URLSearchParams(window.location.search).get("case");
-    state.activeId = state.generated.some((item) => item.id === requestedCase)
-      ? requestedCase
-      : state.generated[0]?.id;
+    if ([...state.generated, ...state.featured].some((item) => item.id === requestedCase)) state.activeId = requestedCase;
     renderHotList();
     renderAll();
   } catch (error) {
