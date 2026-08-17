@@ -134,64 +134,6 @@ main {
   margin: 0 auto;
 }
 
-.case-switcher {
-  margin: 18px 0 22px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.case-switcher > span {
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 850;
-  letter-spacing: 0.16em;
-}
-
-.case-switcher > div {
-  min-width: 0;
-  flex: 1;
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding: 3px 3px 10px;
-  scrollbar-width: thin;
-}
-
-.case-switcher button {
-  min-width: 190px;
-  flex: 0 0 190px;
-  padding: 10px 15px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  color: var(--muted);
-  background: rgba(255, 255, 255, 0.72);
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 800;
-  text-align: left;
-  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
-}
-
-.case-switcher button:hover {
-  transform: translateY(-2px);
-}
-
-.case-switcher button[aria-pressed="true"] {
-  border-color: var(--blue);
-  color: var(--blue-dark);
-  background: var(--blue-soft);
-  box-shadow: 0 8px 18px rgba(23, 105, 224, 0.12);
-}
-
-.case-switcher button small {
-  display: block;
-  margin-bottom: 3px;
-  color: var(--blue);
-  font-size: 10px;
-}
-
 .hero {
   position: relative;
   min-height: 640px;
@@ -1289,23 +1231,6 @@ footer a {
     display: none;
   }
 
-  .case-switcher {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .case-switcher > div {
-    width: 100%;
-  }
-
-  .case-switcher button {
-    min-width: 0;
-    flex: 0 0 160px;
-    padding: 9px 11px;
-    font-size: 11px;
-  }
-
   .hero {
     padding: 38px 22px 28px;
     border-radius: 28px;
@@ -1427,11 +1352,6 @@ footer a {
     </header>
 
     <main id="top">
-      <nav class="case-switcher" aria-label="选择热点演示案例">
-        <span>HOT 10 · 选择一条热榜</span>
-        <div id="topic-switcher"></div>
-      </nav>
-
       <section class="hero" aria-labelledby="topic-title">
         <div class="hero-copy">
           <div class="eyebrow-row">
@@ -1531,7 +1451,7 @@ footer a {
         <div class="section-heading compact">
           <div>
             <p class="section-label">ZHIHU CLI · LATEST SNAPSHOT</p>
-            <h2 id="more-title">最新热榜前 10 条，想先看懂哪条？</h2>
+            <h2 id="more-title">最新热榜前 9 条，想先看懂哪条？</h2>
           </div>
           <span class="cache-time" id="hot-cache-time"></span>
         </div>
@@ -1556,7 +1476,6 @@ footer a {
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script type="module">
 const els = {
-  topicSwitcher: document.querySelector("#topic-switcher"),
   topicRank: document.querySelector("#topic-rank"),
   topicTime: document.querySelector("#topic-time"),
   topicTitle: document.querySelector("#topic-title"),
@@ -1672,10 +1591,6 @@ function switchTopic(id, updateUrl = true) {
   state.activeBox = null;
   els.talkSection.hidden = state.completed.size !== payload.topic.boxes.length;
 
-  document.querySelectorAll("[data-topic-id]").forEach((button) => {
-    button.setAttribute("aria-pressed", String(button.dataset.topicId === id));
-  });
-
   if (updateUrl) {
     const url = new URL(window.location.href);
     url.searchParams.set("case", id);
@@ -1686,19 +1601,6 @@ function switchTopic(id, updateUrl = true) {
   renderBoxes();
   updateProgress();
   if (state.completed.size === payload.topic.boxes.length) renderTalkCard();
-}
-
-function renderTopicSwitcher() {
-  els.topicSwitcher.innerHTML = state.payloads
-    .map(
-      (payload, index) => `
-        <button type="button" data-topic-id="${escapeHtml(payload.id)}" aria-pressed="false">
-          <small>知乎最新热榜 #${index + 1}</small>
-          ${escapeHtml(payload.topic.shortTitle)}
-        </button>
-      `
-    )
-    .join("");
 }
 
 function renderBoxes() {
@@ -1843,7 +1745,7 @@ function renderHotList() {
   const { items, updatedAt } = state.hotList;
   els.hotCacheTime.textContent = `知乎 CLI 最新快照 · ${formatTime(updatedAt)}`;
   els.hotList.innerHTML = items
-    .slice(0, 10)
+    .slice(0, 9)
     .map(
       (payload, index) => `
         <button class="hot-item" type="button" data-select-topic="${escapeHtml(payload.id)}">
@@ -1891,11 +1793,6 @@ function resetExperience() {
 }
 
 function bindEvents() {
-  els.topicSwitcher.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-topic-id]");
-    if (button) switchTopic(button.dataset.topicId);
-  });
-
   els.startButton.addEventListener("click", () => {
     document.querySelector("#explore").scrollIntoView({ behavior: "smooth", block: "start" });
   });
@@ -1935,7 +1832,6 @@ async function init() {
       updatedAt: hotPages.generatedAt,
       source: hotPages.source
     };
-    renderTopicSwitcher();
     renderHotList();
     const requestedCase = new URLSearchParams(window.location.search).get("case");
     const initialId = hotPages.items.some((item) => item.id === requestedCase)
