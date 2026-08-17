@@ -183,12 +183,12 @@ main > section, footer { width: min(1180px, calc(100% - 40px)); margin-left: aut
 .talkCard blockquote small { display: block; margin-bottom: 5px; color: var(--blue); }
 .talkIntro { min-width: 0; }
 .talkMascot { position: relative; min-height: 270px; margin-top: 22px; display: grid; place-items: center; overflow: hidden; }
-.talkMascot img { width: min(310px,92%); mix-blend-mode: multiply; filter: drop-shadow(0 18px 20px rgba(24,64,115,.1)); }
-.talkBook { position: absolute; left: 50%; bottom: 24px; width: 154px; height: 80px; transform: translateX(-50%); filter: drop-shadow(0 10px 10px rgba(24,64,115,.16)); }
-.talkBook::before, .talkBook::after { content: ""; position: absolute; top: 0; bottom: 0; width: 50%; border: 3px solid var(--blue-dark); background: linear-gradient(160deg,#fffdf3,#ffe8a5); }
+.talkMascot img { width: min(310px,92%); mix-blend-mode: multiply; }
+.talkBook { position: absolute; left: 50%; bottom: 24px; width: 154px; height: 80px; transform: translateX(-50%); }
+.talkBook::before, .talkBook::after { content: ""; position: absolute; top: 0; bottom: 0; width: 50%; border: 2px solid #a37d52; background: linear-gradient(160deg,#fffdf6,#ead8bb); }
 .talkBook::before { left: 0; border-radius: 12px 3px 9px 12px; transform: skewY(8deg); transform-origin: right bottom; }
 .talkBook::after { right: 0; border-radius: 3px 12px 12px 9px; transform: skewY(-8deg); transform-origin: left bottom; }
-.talkBook i { position: absolute; z-index: 2; left: 50%; top: 4px; bottom: 3px; width: 3px; border-radius: 999px; background: var(--blue-dark); transform: translateX(-50%); }
+.talkBook i { position: absolute; z-index: 2; left: 50%; top: 4px; bottom: 3px; width: 2px; border-radius: 999px; background: #9b7349; transform: translateX(-50%); }
 .passportSection { padding-bottom: 105px; }
 .passportSection > div:first-child { max-width: 750px; }
 .benefitGrid { margin-top: 32px; display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; }
