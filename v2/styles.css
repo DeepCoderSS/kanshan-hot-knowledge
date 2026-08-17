@@ -74,18 +74,23 @@ main > section, footer { width: min(1180px, calc(100% - 40px)); margin-left: aut
 .hero h1 { max-width: 690px; margin: 26px 0 24px; font-size: clamp(46px, 6.1vw, 74px); line-height: 1.07; letter-spacing: -.06em; }
 .heroCopy > p { max-width: 650px; margin: 0 0 30px; color: #4a5b73; font-size: 17px; line-height: 1.85; }
 .heroActions { display: flex; align-items: center; gap: 13px; flex-wrap: wrap; }
-.primaryButton, .secondaryButton { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 22px; padding: 0 22px; border-radius: 15px; cursor: pointer; font-weight: 850; text-decoration: none; transition: transform 180ms ease, box-shadow 180ms ease; }
+.primaryButton { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 22px; padding: 0 22px; border-radius: 15px; cursor: pointer; font-weight: 850; text-decoration: none; transition: transform 180ms ease, box-shadow 180ms ease; }
 .primaryButton { border: 0; color: white; background: var(--blue); box-shadow: 0 12px 24px rgba(23,105,224,.25); }
-.secondaryButton { border: 1px solid var(--line); color: var(--blue-dark); background: white; }
-.primaryButton:hover, .secondaryButton:hover, .boxCard:hover { transform: translateY(-2px); }
+.primaryButton:hover, .boxCard:hover { transform: translateY(-2px); }
 .safeNote { margin: 15px 0 0 !important; color: #718096 !important; font-size: 11px !important; }
 .heroVisual { position: relative; min-height: 460px; display: grid; place-items: center; }
 .mascotHalo { position: relative; z-index: 2; width: 340px; height: 340px; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle, #fff 0 42%, #dcecff 43% 65%, transparent 66%); }
 .mascotHalo img { width: 86%; height: 86%; object-fit: contain; }
-.orbit { position: absolute; z-index: 4; display: grid; place-items: center; width: 60px; height: 60px; border: 5px solid white; border-radius: 50%; box-shadow: 0 12px 25px rgba(31,78,135,.18); font-weight: 900; }
-.orbitOne { left: 0; top: 24%; color: white; background: var(--blue); }
-.orbitTwo { right: 4%; top: 9%; color: #8b5700; background: var(--yellow); }
-.orbitThree { right: 0; bottom: 25%; color: white; background: var(--green); }
+.orbit { position: absolute; z-index: 4; width: 60px; height: 60px; border: 5px solid white; border-radius: 50%; box-shadow: 0 12px 25px rgba(31,78,135,.18); animation: orbitFloat 4.8s ease-in-out infinite; }
+.orbitOne { left: 0; top: 24%; background: var(--blue); }
+.orbitOne::before { content: ""; position: absolute; inset: 14px; background: white; clip-path: polygon(50% 0, 59% 38%, 100% 50%, 59% 62%, 50% 100%, 41% 62%, 0 50%, 41% 38%); }
+.orbitTwo { right: 4%; top: 9%; background: var(--yellow); animation-delay: -1.6s; }
+.orbitTwo::before { content: ""; position: absolute; width: 19px; height: 22px; left: 50%; top: 10px; border: 3px solid #8b5700; border-radius: 50% 50% 43% 43%; transform: translateX(-50%); }
+.orbitTwo::after { content: ""; position: absolute; width: 14px; height: 6px; left: 50%; bottom: 10px; border-top: 2px solid #8b5700; border-bottom: 2px solid #8b5700; transform: translateX(-50%); }
+.orbitThree { right: 0; bottom: 25%; background: var(--green); animation-delay: -3.2s; }
+.orbitThree::before { content: ""; position: absolute; width: 25px; height: 25px; left: 50%; top: 50%; border: 2px solid white; border-radius: 50%; transform: translate(-50%, -50%); }
+.orbitThree::after { content: ""; position: absolute; width: 7px; height: 19px; left: 50%; top: 50%; background: white; clip-path: polygon(50% 0, 100% 100%, 50% 72%, 0 100%); transform: translate(-50%, -50%) rotate(38deg); }
+@keyframes orbitFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -7px; } }
 .bubble { position: absolute; z-index: 5; right: -12px; bottom: 0; max-width: 230px; padding: 16px 18px; border: 2px solid var(--blue-dark); border-radius: 18px 18px 4px 18px; background: var(--paper); box-shadow: 6px 8px 0 rgba(15,45,92,.1); font-size: 13px; font-weight: 800; line-height: 1.6; }
 .passportPreview { position: absolute; z-index: 6; left: 70px; bottom: 30px; display: flex; align-items: center; gap: 20px; padding: 14px 18px; border: 1px solid rgba(23,105,224,.16); border-radius: 18px; background: rgba(255,255,255,.82); backdrop-filter: blur(14px); box-shadow: 0 12px 30px rgba(24,64,115,.1); }
 .passportPreview > div:first-child { display: grid; grid-template-columns: auto auto; align-items: baseline; gap: 0 9px; }
@@ -254,7 +259,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid rgba(23,105,224,.3); 
   .hero h1 { font-size: 44px; }
   .heroCopy > p { font-size: 15px; }
   .heroActions { align-items: stretch; flex-direction: column; }
-  .primaryButton, .secondaryButton { width: 100%; }
+  .primaryButton { width: 100%; }
   .heroVisual { min-height: 330px; }
   .mascotHalo { width: 260px; height: 260px; }
   .orbit { width: 48px; height: 48px; border-width: 4px; }
