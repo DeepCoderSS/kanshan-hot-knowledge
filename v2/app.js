@@ -243,7 +243,7 @@ async function init() {
   bindEvents();
   try {
     const [collection, loongson, typhoon] = await Promise.all([
-      fetch("data/hot-pages.json").then((response) => response.json()),
+      fetch("data/hot-pages.json", { cache: "no-store" }).then((response) => response.json()),
       fetch("data/hot-topic-loongson.json").then((response) => response.json()),
       fetch("data/hot-topic.json").then((response) => response.json())
     ]);
