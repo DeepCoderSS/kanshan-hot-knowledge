@@ -3,7 +3,6 @@ const els = {
   snapshotNotice: document.querySelector("#snapshot-notice"),
   snapshotTime: document.querySelector("#snapshot-time"),
   hotList: document.querySelector("#hot-list-rail"),
-  caseTabs: document.querySelector("#case-tabs"),
   topicRank: document.querySelector("#topic-rank"),
   topicTime: document.querySelector("#topic-time"),
   topicTitle: document.querySelector("#topic-title"),
@@ -104,28 +103,6 @@ function renderHotList() {
   }).join("");
 }
 
-function renderCaseTabs() {
-  const generatedActive = state.generated.find((item) => item.id === state.activeId);
-  const generatedTab = generatedActive ? `
-    <button type="button" class="active liveCase" data-case-id="${escapeHtml(generatedActive.id)}">
-      <small>当前热榜 · ${escapeHtml(generatedActive.topic.rank)}</small>
-      <strong>${escapeHtml(generatedActive.topic.shortTitle)}</strong>
-      <span>${completedForActive().length}/4 已打开</span>
-    </button>
-  ` : "";
-
-  els.caseTabs.innerHTML = `${generatedTab}${state.featured.map((payload) => {
-    const active = payload.id === state.activeId;
-    const completed = (state.completed[payload.id] ?? []).length;
-    const label = payload.id === "loongson" ? "科技 · 实时热榜 #4" : "公共生活 · 当日热榜";
-    return `
-      <button type="button" class="${active ? "active" : ""}" data-case-id="${escapeHtml(payload.id)}">
-        <small>${label}</small><strong>${escapeHtml(payload.topic.shortTitle)}</strong><span>${completed}/4 已打开</span>
-      </button>
-    `;
-  }).join("")}`;
-}
-
 function renderTopic() {
   const payload = activePayload();
   if (!payload) return;
@@ -177,7 +154,6 @@ function renderProgress() {
 
 function renderAll() {
   renderPassport();
-  renderCaseTabs();
   renderTopic();
   renderBoxes();
   renderProgress();
@@ -247,10 +223,6 @@ function bindEvents() {
   els.hotList.addEventListener("click", (event) => {
     const button = event.target.closest("[data-topic-id]");
     if (button) chooseTopic(button.dataset.topicId, true);
-  });
-  els.caseTabs.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-case-id]");
-    if (button) chooseTopic(button.dataset.caseId, false);
   });
   els.boxGrid.addEventListener("click", (event) => {
     const button = event.target.closest("[data-box-id]");
